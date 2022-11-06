@@ -1,0 +1,92 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/06/2022  21:42:02  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+F:\EMBEDDED_TECHNOLOGY_AND_APPLICATIONS\SOFTWARE\KEIL5_C51\C51\BIN\BL51.EXE .\Objects\hex\main.obj TO .\Objects\hex\µ„’Û
+>> ª≠Õº PRINT (.\Listings\µ„’Ûª≠Õº.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\hex\main.obj (MAIN)
+  F:\EMBEDDED_TECHNOLOGY_AND_APPLICATIONS\SOFTWARE\KEIL5_C51\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\hex\µ„’Ûª≠Õº (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0029H     UNIT         ?PR?_WRITE_BITE?MAIN
+            CODE    002CH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0038H     000BH     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\hex\µ„’Ûª≠Õº (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?_WRITE_BITE?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\hex\µ„’Ûª≠Õº (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00B0H         PUBLIC        P3
+  C:0038H         PUBLIC        main
+  C:0003H         PUBLIC        _write_bite
+  B:00B0H.5       PUBLIC        RCK
+  B:00B0H.4       PUBLIC        SER
+  -------         PROC          _WRITE_BITE
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/06/2022  21:42:02  PAGE 2
+
+
+  D:0005H         SYMBOL        byte
+  -------         DO            
+  D:0003H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         7
+  C:0005H         LINE#         8
+  C:0005H         LINE#         11
+  C:0007H         LINE#         12
+  C:0007H         LINE#         14
+  C:0023H         LINE#         15
+  C:0027H         LINE#         17
+  C:0029H         LINE#         19
+  C:002BH         LINE#         20
+  -------         ENDPROC       _WRITE_BITE
+  -------         PROC          MAIN
+  C:0038H         LINE#         21
+  C:0038H         LINE#         22
+  C:0038H         LINE#         24
+  C:003AH         LINE#         25
+  C:003CH         LINE#         26
+  C:0041H         LINE#         27
+  C:0041H         LINE#         28
+  C:0041H         LINE#         30
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=67
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

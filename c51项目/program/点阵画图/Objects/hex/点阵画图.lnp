@@ -1,0 +1,3 @@
+".\Objects\hex\main.obj" 
+TO ".\Objects\hex\µ„’Ûª≠Õº" 
+PRINT(".\Listings\µ„’Ûª≠Õº.m51") RAMSIZE(256) 
