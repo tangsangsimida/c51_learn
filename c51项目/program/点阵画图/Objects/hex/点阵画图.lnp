@@ -1,3 +1,4 @@
-".\Objects\hex\main.obj" 
+".\Objects\hex\main.obj",
+".\Objects\hex\c51tangsang.obj" 
 TO ".\Objects\hex\µ„’Ûª≠Õº" 
 PRINT(".\Listings\µ„’Ûª≠Õº.m51") RAMSIZE(256) 

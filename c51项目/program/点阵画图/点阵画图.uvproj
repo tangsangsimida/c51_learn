@@ -368,6 +368,16 @@
               <FileType>1</FileType>
               <FilePath>.\Objects\code\main.c</FilePath>
             </File>
+            <File>
+              <FileName>c51tangsang.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Objects\code\c51tangsang.c</FilePath>
+            </File>
+            <File>
+              <FileName>c51tangsang.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Objects\code\c51tangsang.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

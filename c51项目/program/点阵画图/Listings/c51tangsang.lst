@@ -1,0 +1,77 @@
+C51 COMPILER V9.54   C51TANGSANG                                                           11/07/2022 23:10:37 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE C51TANGSANG
+OBJECT MODULE PLACED IN .\Objects\hex\c51tangsang.obj
+COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE Objects\code\c51tangsang.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\..\
+                    -lib\tangsanglib) DEBUG OBJECTEXTEND PRINT(.\Listings\c51tangsang.lst) TABS(2) OBJECT(.\Objects\hex\c51tangsang.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          /*
+   3           *¸Ã¿âÎªtangsangÇ×ÊÖ´òÔì£¬ÈË¹¤´òÔì£¬±È½Ï´Ö²Ú£¬¹¦ÄÜÇ·È±»òè¦´Ã£¬½öÌá¹©Ñ§Ï°²Î¿¼ 
+   4           *¸Ã¿âÎªtangsangÇ×ÊÖ´òÔì£¬ÈË¹¤´òÔì£¬±È½Ï´Ö²Ú£¬¹¦ÄÜÇ·È±»òè¦´Ã£¬½öÌá¹©Ñ§Ï°²Î¿¼ 
+   5           *¸Ã¿âÎªtangsangÇ×ÊÖ´òÔì£¬ÈË¹¤´òÔì£¬±È½Ï´Ö²Ú£¬¹¦ÄÜÇ·È±»òè¦´Ã£¬½öÌá¹©Ñ§Ï°²Î¿¼ 
+   6           */
+   7          
+   8          
+   9          
+  10          //ÑÓÊ±º¯Êı
+  11          //unsigned int ms²ÎÊıµ¥Î»ºÁÃë 
+  12          void delay(unsigned int ms)
+  13          {
+  14   1        unsigned char i, j;
+  15   1        while(ms--)
+  16   1        { 
+  17   2          i = 12;
+  18   2          j = 169;
+  19   2          do
+  20   2          {
+  21   3            while (--j);
+  22   3          } while (--i);
+  23   2        }
+  24   1      }
+  25          //°ËÎ»ÊıÂë¹ÜÖ¸¶¨Î»ÖÃÏÔÊ¾Êı×Ö
+  26          //ºóÆÚ¿ÉÀ©Õ¹ÎªÖÇÄÜÏÔÊ¾×ÖÄ¸»òÊı×Ö£¬or DIYÏÔÊ¾ 
+  27          void show_digital(unsigned int th,unsigned int digital)
+  28          {
+  29   1        //¸øÒ»¸öÊı×é´æ·ÅÄÜ¹»ÏÔÊ¾µÄËùÓĞÊı×Ö£¬ºóÆÚ¸ø×ÖÄ¸»»Ò»¸ö±í´æ·Å
+  30   1        //´Ë´¦´æÔÚÄÚ´æÔ½½çµÄÇé¿ö£¬Ó¦ÅĞ¶Ï´«ÈëµÄ²ÎÊıÊÇ·ñÔÚ¹æ¶¨ÊıÂë¹ÜÊıÁ¿ÄÚ£¬³¬³öÔòÏÔÊ¾¹æ¶¨ÄÚÈİ£¬Ö÷ÒªÊÇ³ÌĞòÔ±×Ô¼ºµ÷Ê
+             -Ô³ÌĞòµÄÊ±ºò»á³öÏÖÏÂ±êÔ½½ç
+  31   1        //ºóÆÚÒ²¿ÉÒÔÍ¨¹ı°´Å¥ÊµÏÖÊıÂë¹ÜÏÔÊ¾ÏàÓ¦µÄÄÚÈİ
+  32   1        //»òÕßÍ¨¹ı°´Å¥ÏÔÊ¾Ïà¶ÔÓ¦µÄÊı×Ö 
+  33   1        //0-9 
+  34   1        unsigned char digital_table[]={0x3,0x9F,0x24,0xC,0x99,0x49,0x7D,0x1F,0xFE,0x19};
+  35   1        switch(th)
+  36   1        {
+  37   2          case 1:P2_2=0;P2_3=0;P2_4=0;break;
+  38   2          case 2:P2_2=0;P2_3=0;P2_4=1;break;
+  39   2          case 3:P2_2=0;P2_3=1;P2_4=0;break;
+  40   2          case 4:P2_2=0;P2_3=1;P2_4=1;break;
+  41   2          case 5:P2_2=1;P2_3=0;P2_4=0;break;
+  42   2          case 6:P2_2=1;P2_3=0;P2_4=1;break;
+  43   2          case 7:P2_2=1;P2_3=1;P2_4=0;break;
+  44   2          case 8:P2_2=1;P2_3=1;P2_4=1;break;
+  45   2          //Ä¬ÈÏÔİÊ±ÏÈÓÃ1´úÌæ
+  46   2          default:P2_2=0;P2_3=0;P2_4=0;P0=digital_table[digital];
+  47   2        }
+  48   1        P0=digital_table[digital];
+  49   1      }
+  50          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.54   C51TANGSANG                                                           11/07/2022 23:10:37 PAGE 2   
+
+   CODE SIZE        =    169    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      14
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

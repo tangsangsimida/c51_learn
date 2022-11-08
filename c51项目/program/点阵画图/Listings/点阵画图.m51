@@ -1,9 +1,9 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        11/06/2022  21:42:02  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/08/2022  17:16:26  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-F:\EMBEDDED_TECHNOLOGY_AND_APPLICATIONS\SOFTWARE\KEIL5_C51\C51\BIN\BL51.EXE .\Objects\hex\main.obj TO .\Objects\hex\µ„’Û
->> ª≠Õº PRINT (.\Listings\µ„’Ûª≠Õº.m51) RAMSIZE (256)
+D:\SOFTWARE\KEIL5\C51\BIN\BL51.EXE .\Objects\hex\main.obj, .\Objects\hex\c51tangsang.obj TO .\Objects\hex\µ„’Ûª≠Õº PRINT
+>>  (.\Listings\µ„’Ûª≠Õº.m51) RAMSIZE (256)
 
 
 MEMORY MODEL: SMALL
@@ -11,7 +11,9 @@ MEMORY MODEL: SMALL
 
 INPUT MODULES INCLUDED:
   .\Objects\hex\main.obj (MAIN)
-  F:\EMBEDDED_TECHNOLOGY_AND_APPLICATIONS\SOFTWARE\KEIL5_C51\C51\LIB\C51S.LIB (?C_STARTUP)
+  .\Objects\hex\c51tangsang.obj (C51TANGSANG)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C?COPY)
 
 
 LINK MAP OF MODULE:  .\Objects\hex\µ„’Ûª≠Õº (MAIN)
@@ -22,13 +24,19 @@ LINK MAP OF MODULE:  .\Objects\hex\µ„’Ûª≠Õº (MAIN)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            IDATA   0008H     0001H     UNIT         ?STACK
+            DATA    0008H     000EH     UNIT         ?DT?_SHOW_DIGITAL?C51TANGSANG
+            IDATA   0016H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     0029H     UNIT         ?PR?_WRITE_BITE?MAIN
-            CODE    002CH     000CH     UNIT         ?C_C51STARTUP
-            CODE    0038H     000BH     UNIT         ?PR?MAIN?MAIN
+            CODE    0003H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    00F9H     0094H     UNIT         ?PR?_SHOW_DIGITAL?C51TANGSANG
+            CODE    018DH     0029H     UNIT         ?PR?_WRITE_BYTE?MAIN
+            CODE    01B6H     001BH     UNIT         ?PR?_SHOW_CLUM?MAIN
+            CODE    01D1H     0015H     UNIT         ?PR?_DELAY?C51TANGSANG
+            CODE    01E6H     0014H     UNIT         ?PR?MAIN?MAIN
+            CODE    01FAH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0206H     000AH     UNIT         ?CO?C51TANGSANG
 
 
 
@@ -42,51 +50,130 @@ SEGMENT
   +--> ?PR?MAIN?MAIN
 
 ?PR?MAIN?MAIN
-  +--> ?PR?_WRITE_BITE?MAIN
+  +--> ?PR?_DELAY?C51TANGSANG
+  +--> ?PR?_SHOW_CLUM?MAIN
+
+?PR?_SHOW_CLUM?MAIN
+  +--> ?PR?_WRITE_BYTE?MAIN
 
 
 
 SYMBOL TABLE OF MODULE:  .\Objects\hex\µ„’Ûª≠Õº (MAIN)
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/08/2022  17:16:26  PAGE 2
+
+
 
   VALUE           TYPE          NAME
   ----------------------------------
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
   D:00B0H         PUBLIC        P3
-  C:0038H         PUBLIC        main
-  C:0003H         PUBLIC        _write_bite
+  C:01E6H         PUBLIC        main
+  C:018DH         SYMBOL        _write_byte
+  C:01B6H         PUBLIC        _show_clum
   B:00B0H.5       PUBLIC        RCK
   B:00B0H.4       PUBLIC        SER
-  -------         PROC          _WRITE_BITE
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/06/2022  21:42:02  PAGE 2
-
-
+  -------         PROC          _WRITE_BYTE
   D:0005H         SYMBOL        byte
   -------         DO            
   D:0003H         SYMBOL        i
   -------         ENDDO         
-  C:0003H         LINE#         7
-  C:0005H         LINE#         8
-  C:0005H         LINE#         11
-  C:0007H         LINE#         12
-  C:0007H         LINE#         14
-  C:0023H         LINE#         15
-  C:0027H         LINE#         17
-  C:0029H         LINE#         19
-  C:002BH         LINE#         20
-  -------         ENDPROC       _WRITE_BITE
+  C:018DH         LINE#         11
+  C:018FH         LINE#         12
+  C:018FH         LINE#         15
+  C:0191H         LINE#         16
+  C:0191H         LINE#         18
+  C:01ADH         LINE#         19
+  C:01B1H         LINE#         22
+  C:01B3H         LINE#         24
+  C:01B5H         LINE#         25
+  -------         ENDPROC       _WRITE_BYTE
+  -------         PROC          _SHOW_CLUM
+  D:0004H         SYMBOL        clum
+  D:0006H         SYMBOL        Data
+  C:01B6H         LINE#         26
+  C:01BAH         LINE#         27
+  C:01BAH         LINE#         28
+  C:01BFH         LINE#         29
+  C:01D0H         LINE#         31
+  -------         ENDPROC       _SHOW_CLUM
   -------         PROC          MAIN
-  C:0038H         LINE#         21
-  C:0038H         LINE#         22
-  C:0038H         LINE#         24
-  C:003AH         LINE#         25
-  C:003CH         LINE#         26
-  C:0041H         LINE#         27
-  C:0041H         LINE#         28
-  C:0041H         LINE#         30
+  C:01E6H         LINE#         32
+  C:01E6H         LINE#         33
+  C:01E6H         LINE#         35
+  C:01E8H         LINE#         36
+  C:01EAH         LINE#         37
+  C:01F1H         LINE#         38
+  C:01F8H         LINE#         39
+  C:01F8H         LINE#         40
+  C:01F8H         LINE#         42
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
-Program Size: data=9.0 xdata=0 code=67
-LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
+  -------         MODULE        C51TANGSANG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:00F9H         PUBLIC        _show_digital
+  C:01D1H         PUBLIC        _delay
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/08/2022  17:16:26  PAGE 3
+
+
+  B:00A0H.4       PUBLIC        P2_4
+  C:0206H         SYMBOL        _?ix1000
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:01D1H         LINE#         12
+  C:01D1H         LINE#         13
+  C:01D1H         LINE#         15
+  C:01DBH         LINE#         16
+  C:01DBH         LINE#         17
+  C:01DDH         LINE#         18
+  C:01DFH         LINE#         20
+  C:01DFH         LINE#         21
+  C:01E1H         LINE#         22
+  C:01E3H         LINE#         23
+  C:01E5H         LINE#         24
+  -------         ENDPROC       _DELAY
+  -------         PROC          _SHOW_DIGITAL
+  D:0008H         SYMBOL        th
+  D:000AH         SYMBOL        digital
+  -------         DO            
+  D:000CH         SYMBOL        digital_table
+  -------         ENDDO         
+  C:00F9H         LINE#         27
+  C:0101H         LINE#         28
+  C:0101H         LINE#         34
+  C:0114H         LINE#         35
+  C:0146H         LINE#         36
+  C:0146H         LINE#         37
+  C:014AH         LINE#         38
+  C:014EH         LINE#         39
+  C:0152H         LINE#         40
+  C:0156H         LINE#         41
+  C:015EH         LINE#         42
+  C:0166H         LINE#         43
+  C:016EH         LINE#         44
+  C:0176H         LINE#         46
+  C:0184H         LINE#         47
+  C:0184H         LINE#         48
+  C:018CH         LINE#         49
+  -------         ENDPROC       _SHOW_DIGITAL
+  -------         ENDMOD        C51TANGSANG
+
+  -------         MODULE        ?C?COPY
+  C:00D3H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SHOW_DIGITAL?C51TANGSANG
+
+Program Size: data=23.0 xdata=0 code=528
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
