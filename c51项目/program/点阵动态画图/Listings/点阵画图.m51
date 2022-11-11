@@ -1,0 +1,219 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/09/2022  19:02:40  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\SOFTWARE\KEIL5\C51\BIN\BL51.EXE .\Objects\hex\main.obj, .\Objects\hex\c51tangsang.obj TO .\Objects\hex\µ„’Ûª≠Õº PRINT
+>>  (.\Listings\µ„’Ûª≠Õº.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\hex\main.obj (MAIN)
+  .\Objects\hex\c51tangsang.obj (C51TANGSANG)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C?COPY)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (STRLEN)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C_INIT)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C?CLDPTR)
+
+
+LINK MAP OF MODULE:  .\Objects\hex\µ„’Ûª≠Õº (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0020H     UNIT         ?DT?MAIN
+            DATA    0028H     000EH     UNIT         ?DT?_SHOW_DIGITAL?C51TANGSANG
+            DATA    0036H     0001H     UNIT         _DATA_GROUP_
+            IDATA   0037H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     010FH     UNIT         ?C?LIB_CODE
+            CODE    0112H     0094H     UNIT         ?PR?_SHOW_DIGITAL?C51TANGSANG
+            CODE    01A6H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0232H     0030H     UNIT         ?PR?MAIN?MAIN
+            CODE    0262H     0024H     UNIT         ?C_INITSEG
+            CODE    0286H     001EH     UNIT         ?PR?_WRITE_BYTE?MAIN
+            CODE    02A4H     001BH     UNIT         ?PR?_SHOW_CLUM?MAIN
+            CODE    02BFH     0015H     UNIT         ?PR?_DELAY?C51TANGSANG
+            CODE    02D4H     0015H     UNIT         ?PR?_STRLEN?STRLEN
+            CODE    02E9H     000AH     UNIT         ?CO?C51TANGSANG
+            CODE    02F3H     0005H     UNIT         ?PR?LED_INIT?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\hex\µ„’Ûª≠Õº (MAIN)
+
+
+SEGMENT                                 DATA_GROUP 
+  +--> CALLED SEGMENT                 START    LENGTH
+-----------------------------------------------------
+?C_C51STARTUP                         -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                         0036H    0001H
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2022  19:02:40  PAGE 2
+
+
+  +--> ?PR?LED_INIT?MAIN
+  +--> ?PR?_STRLEN?STRLEN
+  +--> ?PR?_SHOW_CLUM?MAIN
+  +--> ?PR?_DELAY?C51TANGSANG
+
+?PR?_SHOW_CLUM?MAIN                   -----    -----
+  +--> ?PR?_WRITE_BYTE?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\hex\µ„’Ûª≠Õº (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00B0H         PUBLIC        P3
+  C:0232H         PUBLIC        main
+  D:0008H         PUBLIC        clum
+  B:00B0H.6       PUBLIC        SRCK
+  C:0286H         SYMBOL        _write_byte
+  C:02F3H         PUBLIC        led_init
+  C:02A4H         PUBLIC        _show_clum
+  B:00B0H.5       PUBLIC        RCK
+  B:00B0H.4       PUBLIC        SER
+  -------         PROC          _WRITE_BYTE
+  D:0007H         SYMBOL        byte
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0286H         LINE#         17
+  C:0286H         LINE#         18
+  C:0286H         LINE#         21
+  C:0288H         LINE#         22
+  C:0288H         LINE#         24
+  C:0293H         LINE#         25
+  C:0297H         LINE#         27
+  C:0299H         LINE#         28
+  C:029BH         LINE#         29
+  C:029FH         LINE#         31
+  C:02A1H         LINE#         33
+  C:02A3H         LINE#         34
+  -------         ENDPROC       _WRITE_BYTE
+  -------         PROC          _SHOW_CLUM
+  D:0005H         SYMBOL        clum
+  D:0006H         SYMBOL        Data
+  C:02A4H         LINE#         35
+  C:02A8H         LINE#         36
+  C:02A8H         LINE#         37
+  C:02ADH         LINE#         38
+  C:02BEH         LINE#         40
+  -------         ENDPROC       _SHOW_CLUM
+  -------         PROC          LED_INIT
+  C:02F3H         LINE#         42
+  C:02F3H         LINE#         43
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2022  19:02:40  PAGE 3
+
+
+  C:02F3H         LINE#         44
+  C:02F5H         LINE#         45
+  C:02F7H         LINE#         46
+  -------         ENDPROC       LED_INIT
+  -------         PROC          MAIN
+  -------         DO            
+  D:0036H         SYMBOL        cl
+  -------         ENDDO         
+  C:0232H         LINE#         47
+  C:0232H         LINE#         48
+  C:0232H         LINE#         51
+  C:0235H         LINE#         52
+  C:0235H         LINE#         53
+  C:0235H         LINE#         54
+  C:0249H         LINE#         55
+  C:0249H         LINE#         56
+  C:0255H         LINE#         57
+  C:0259H         LINE#         58
+  C:0260H         LINE#         59
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        C51TANGSANG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:0112H         PUBLIC        _show_digital
+  C:02BFH         PUBLIC        _delay
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+  B:00A0H.4       PUBLIC        P2_4
+  C:02E9H         SYMBOL        _?ix1000
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:02BFH         LINE#         12
+  C:02BFH         LINE#         13
+  C:02BFH         LINE#         15
+  C:02C9H         LINE#         16
+  C:02C9H         LINE#         17
+  C:02CBH         LINE#         18
+  C:02CDH         LINE#         20
+  C:02CDH         LINE#         21
+  C:02CFH         LINE#         22
+  C:02D1H         LINE#         23
+  C:02D3H         LINE#         24
+  -------         ENDPROC       _DELAY
+  -------         PROC          _SHOW_DIGITAL
+  D:0028H         SYMBOL        th
+  D:002AH         SYMBOL        digital
+  -------         DO            
+  D:002CH         SYMBOL        digital_table
+  -------         ENDDO         
+  C:0112H         LINE#         27
+  C:011AH         LINE#         28
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2022  19:02:40  PAGE 4
+
+
+  C:011AH         LINE#         34
+  C:012DH         LINE#         35
+  C:015FH         LINE#         36
+  C:015FH         LINE#         37
+  C:0163H         LINE#         38
+  C:0167H         LINE#         39
+  C:016BH         LINE#         40
+  C:016FH         LINE#         41
+  C:0177H         LINE#         42
+  C:017FH         LINE#         43
+  C:0187H         LINE#         44
+  C:018FH         LINE#         46
+  C:019DH         LINE#         47
+  C:019DH         LINE#         48
+  C:01A5H         LINE#         49
+  -------         ENDPROC       _SHOW_DIGITAL
+  -------         ENDMOD        C51TANGSANG
+
+  -------         MODULE        ?C?COPY
+  C:00D3H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        STRLEN
+  C:02D4H         PUBLIC        _STRLEN
+  -------         ENDMOD        STRLEN
+
+  -------         MODULE        ?C?CLDPTR
+  C:00F9H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SHOW_DIGITAL?C51TANGSANG
+
+Program Size: data=56.0 xdata=0 code=760
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
