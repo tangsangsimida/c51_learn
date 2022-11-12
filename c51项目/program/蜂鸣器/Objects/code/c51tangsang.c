@@ -1,5 +1,6 @@
-#include <REGX52.H>
+
 #include "c51tangsang.h"
+
 /*
  *该库为tangsang亲手打造，人工打造，比较粗糙，功能欠缺或瑕疵，仅提供学习参考 
  *该库为tangsang亲手打造，人工打造，比较粗糙，功能欠缺或瑕疵，仅提供学习参考 
@@ -32,21 +33,28 @@ void show_digital(unsigned int th,unsigned int digital)
 	//后期也可以通过按钮实现数码管显示相应的内容
 	//或者通过按钮显示相对应的数字 
 	//0-9 
-	unsigned char digital_table[]={0x3,0x9F,0x24,0xC,0x99,0x49,0x7D,0x1F,0xFE,0x19};
+	unsigned char code digital_table[]={0xc0,0xf9,0xa4,0xb0, 
+																			0x99,0x92,0x82,0xf8,  
+																			0x80,0x90,0x88,0x83, 
+																			0xc6,0xa1,0x86,0x8e};
 	switch(th)
-	{
-		case 1:P2_2=0;P2_3=0;P2_4=0;break;
-		case 2:P2_2=0;P2_3=0;P2_4=1;break;
-		case 3:P2_2=0;P2_3=1;P2_4=0;break;
-		case 4:P2_2=0;P2_3=1;P2_4=1;break;
-		case 5:P2_2=1;P2_3=0;P2_4=0;break;
-		case 6:P2_2=1;P2_3=0;P2_4=1;break;
-		case 7:P2_2=1;P2_3=1;P2_4=0;break;
-		case 8:P2_2=1;P2_3=1;P2_4=1;break;
+	{																		//    P2_4 P2_3 P2_2
+		case 8:P2_2=0;P2_3=0;P2_4=0;break;// 1. 1			1 		1
+		case 4:P2_2=0;P2_3=0;P2_4=1;break;// 2. 1			1			0
+		case 6:P2_2=0;P2_3=1;P2_4=0;break;// 3. 1 		0 		1
+		case 2:P2_2=0;P2_3=1;P2_4=1;break;// 4. 1 		0 		0
+		case 7:P2_2=1;P2_3=0;P2_4=0;break;// 5. 0 		1 		1
+		case 3:P2_2=1;P2_3=0;P2_4=1;break;// 6. 0 		1 		0
+		case 5:P2_2=1;P2_3=1;P2_4=0;break;// 7. 0 		0 		1
+		case 1:P2_2=1;P2_3=1;P2_4=1;break;// 8. 0 		0 		0
 		//默认暂时先用1代替
 		default:P2_2=0;P2_3=0;P2_4=0;P0=digital_table[digital];
 	}
-	P0=digital_table[digital];
+	//上面的字码是共阳极的，所以直接取反，懒得写字码，直接百度的，结果发现是共阳极 的，潮。
+	P0=~digital_table[digital];
+	delay(2);
+	//消个抖
+	
 }
 
 static void write_byte(unsigned char byte)
@@ -90,3 +98,13 @@ void time_init()
 	PT0=0;
 	TR0=1; //定时器0的运行控制位
 }
+
+//蜂鸣器x-ms频率
+void Buzzer_on(uint ms)
+{
+	for(;ms>=0;ms--)
+	{
+		Buzzer=!Buzzer;
+		delay(1);
+	}
+}	

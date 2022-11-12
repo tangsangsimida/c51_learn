@@ -1,20 +1,23 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        11/05/2022  19:47:30  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/12/2022  12:20:43  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-D:\SOFTWARE\KEIL5\C51\BIN\BL51.EXE .\Objects\hex\main.obj TO .\Objects\hex\·äÃùÆ÷ PRINT (.\Listings\·äÃùÆ÷.m51) RAMSIZE 
->> (256)
+D:\SOFTWARE\KEIL5\C51\BIN\BL51.EXE .\Objects\hex\c51tangsang.obj, .\Objects\hex\main.obj TO .\Objects\hex\·äÃùÆ÷ PRINT (
+>> .\Listings\·äÃùÆ÷.m51) RAMSIZE (256) DISABLEWARNING (16)
 
 
 MEMORY MODEL: SMALL
 
 
 INPUT MODULES INCLUDED:
+  .\Objects\hex\c51tangsang.obj (C51TANGSANG)
   .\Objects\hex\main.obj (MAIN)
   D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C?SIDIV)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C?UIDIV)
 
 
-LINK MAP OF MODULE:  .\Objects\hex\·äÃùÆ÷ (MAIN)
+LINK MAP OF MODULE:  .\Objects\hex\·äÃùÆ÷ (C51TANGSANG)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -27,75 +30,201 @@ LINK MAP OF MODULE:  .\Objects\hex\·äÃùÆ÷ (MAIN)
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     002BH     UNIT         ?PR?MAIN?MAIN
-            CODE    002EH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0003H     008BH     UNIT         ?C?LIB_CODE
+            CODE    008EH     008AH     UNIT         ?PR?_SHOW_DIGITAL?C51TANGSANG
+            CODE    0118H     003AH     UNIT         ?PR?MAIN?MAIN
+            CODE    0152H     001EH     UNIT         ?PR?_WRITE_BYTE?C51TANGSANG
+            CODE    0170H     001BH     UNIT         ?PR?_SHOW_CLUM?C51TANGSANG
+            CODE    018BH     001BH     UNIT         ?PR?_BUZZER_ON?C51TANGSANG
+            CODE    01A6H     0017H     UNIT         ?PR?TIME_INIT?C51TANGSANG
+            CODE    01BDH     0015H     UNIT         ?PR?_DELAY?C51TANGSANG
+            CODE    01D2H     0010H     UNIT         ?CO?C51TANGSANG
+            CODE    01E2H     000CH     UNIT         ?C_C51STARTUP
 
 
 
-OVERLAY MAP OF MODULE:   .\Objects\hex\·äÃùÆ÷ (MAIN)
+OVERLAY MAP OF MODULE:   .\Objects\hex\·äÃùÆ÷ (C51TANGSANG)
 
 
-SEGMENT                          DATA_GROUP 
-  +--> CALLED SEGMENT          START    LENGTH
-----------------------------------------------
-?C_C51STARTUP                  -----    -----
+SEGMENT                                 DATA_GROUP 
+  +--> CALLED SEGMENT                 START    LENGTH
+-----------------------------------------------------
+?C_C51STARTUP                         -----    -----
   +--> ?PR?MAIN?MAIN
 
-?PR?MAIN?MAIN                  0008H    0002H
+?PR?MAIN?MAIN                         0008H    0002H
+  +--> ?PR?_SHOW_DIGITAL?C51TANGSANG
+  +--> ?PR?_DELAY?C51TANGSANG
+
+?PR?_SHOW_DIGITAL?C51TANGSANG         -----    -----
+  +--> ?CO?C51TANGSANG
+  +--> ?PR?_DELAY?C51TANGSANG
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/12/2022  12:20:43  PAGE 2
 
 
 
-UNRESOLVED EXTERNAL SYMBOLS:
-   _DELAY
 
 
-
-SYMBOL TABLE OF MODULE:  .\Objects\hex\·äÃùÆ÷ (MAIN)
+SYMBOL TABLE OF MODULE:  .\Objects\hex\·äÃùÆ÷ (C51TANGSANG)
 
   VALUE           TYPE          NAME
   ----------------------------------
 
+  -------         MODULE        C51TANGSANG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A0H.5       PUBLIC        Buzzer
+  B:00A8H.7       PUBLIC        EA
+  C:008EH         PUBLIC        _show_digital
+  C:01BDH         PUBLIC        _delay
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+  B:00A0H.4       PUBLIC        P2_4
+  B:00B0H.6       PUBLIC        SRCK
+  D:0089H         PUBLIC        TMOD
+  C:018BH         PUBLIC        _Buzzer_on
+  C:0152H         SYMBOL        _write_byte
+  C:01A6H         PUBLIC        time_init
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:00B8H.1       PUBLIC        PT0
+  B:0088H.4       PUBLIC        TR0
+  C:0170H         PUBLIC        _show_clum
+  B:00B0H.5       PUBLIC        RCK
+  B:00B0H.4       PUBLIC        SER
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:01BDH         LINE#         14
+  C:01BDH         LINE#         15
+  C:01BDH         LINE#         17
+  C:01C7H         LINE#         18
+  C:01C7H         LINE#         19
+  C:01C9H         LINE#         20
+  C:01CBH         LINE#         22
+  C:01CBH         LINE#         23
+  C:01CDH         LINE#         24
+  C:01CFH         LINE#         25
+  C:01D1H         LINE#         26
+  -------         ENDPROC       _DELAY
+  -------         PROC          _SHOW_DIGITAL
+  D:0006H         SYMBOL        th
+  D:0004H         SYMBOL        digital
+  -------         DO            
+  C:01D2H         SYMBOL        digital_table
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/12/2022  12:20:43  PAGE 3
+
+
+  -------         ENDDO         
+  C:008EH         LINE#         29
+  C:008EH         LINE#         30
+  C:008EH         LINE#         40
+  C:00BEH         LINE#         41
+  C:00BEH         LINE#         42
+  C:00C2H         LINE#         43
+  C:00C6H         LINE#         44
+  C:00CAH         LINE#         45
+  C:00CEH         LINE#         46
+  C:00D6H         LINE#         47
+  C:00DEH         LINE#         48
+  C:00E6H         LINE#         49
+  C:00EEH         LINE#         51
+  C:0102H         LINE#         52
+  C:0102H         LINE#         54
+  C:0111H         LINE#         55
+  -------         ENDPROC       _SHOW_DIGITAL
+  -------         PROC          _WRITE_BYTE
+  D:0007H         SYMBOL        byte
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0152H         LINE#         60
+  C:0152H         LINE#         61
+  C:0152H         LINE#         64
+  C:0154H         LINE#         65
+  C:0154H         LINE#         67
+  C:015FH         LINE#         68
+  C:0163H         LINE#         70
+  C:0165H         LINE#         71
+  C:0167H         LINE#         72
+  C:016BH         LINE#         74
+  C:016DH         LINE#         76
+  C:016FH         LINE#         77
+  -------         ENDPROC       _WRITE_BYTE
+  -------         PROC          _SHOW_CLUM
+  D:0005H         SYMBOL        clum
+  D:0006H         SYMBOL        Data
+  C:0170H         LINE#         80
+  C:0174H         LINE#         81
+  C:0174H         LINE#         82
+  C:0179H         LINE#         83
+  C:018AH         LINE#         85
+  -------         ENDPROC       _SHOW_CLUM
+  -------         PROC          TIME_INIT
+  C:01A6H         LINE#         88
+  C:01A6H         LINE#         89
+  C:01A6H         LINE#         91
+  C:01A9H         LINE#         92
+  C:01ACH         LINE#         93
+  C:01AEH         LINE#         94
+  C:01B1H         LINE#         95
+  C:01B4H         LINE#         96
+  C:01B6H         LINE#         97
+  C:01B8H         LINE#         98
+  C:01BAH         LINE#         99
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/12/2022  12:20:43  PAGE 4
+
+
+  C:01BCH         LINE#         100
+  -------         ENDPROC       TIME_INIT
+  -------         PROC          _BUZZER_ON
+  D:0002H         SYMBOL        ms
+  C:018BH         LINE#         103
+  C:018FH         LINE#         104
+  C:018FH         LINE#         105
+  C:0195H         LINE#         106
+  C:0195H         LINE#         107
+  C:0197H         LINE#         108
+  C:019EH         LINE#         109
+  C:01A5H         LINE#         110
+  -------         ENDPROC       _BUZZER_ON
+  -------         ENDMOD        C51TANGSANG
+
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
-  B:00A0H.5       PUBLIC        P2_5
-  C:0003H         PUBLIC        main
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/05/2022  19:47:30  PAGE 2
-
-
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0118H         PUBLIC        main
   -------         PROC          MAIN
   -------         DO            
   D:0008H         SYMBOL        i
   -------         ENDDO         
-  C:0003H         LINE#         3
-  C:0003H         LINE#         4
-  C:0003H         LINE#         5
-  C:0003H         LINE#         6
-  C:0003H         LINE#         7
-  C:0009H         LINE#         8
-  C:0016H         LINE#         9
-  C:0016H         LINE#         10
-  C:0018H         LINE#         11
-  C:001FH         LINE#         12
-  C:0021H         LINE#         13
-  C:0028H         LINE#         14
-  C:002AH         LINE#         16
-  C:002CH         LINE#         17
+  C:0118H         LINE#         7
+  C:0118H         LINE#         8
+  C:0118H         LINE#         10
+  C:0118H         LINE#         11
+  C:0118H         LINE#         12
+  C:011DH         LINE#         13
+  C:011DH         LINE#         14
+  C:0136H         LINE#         15
+  C:013DH         LINE#         16
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _DELAY
-    MODULE:  .\Objects\hex\main.obj (MAIN)
+  -------         MODULE        ?C?SIDIV
+  C:0003H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
 
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _DELAY
-    MODULE:  .\Objects\hex\main.obj (MAIN)
-    ADDRESS: 001DH
+  -------         MODULE        ?C?UIDIV
+  C:0039H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
 
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _DELAY
-    MODULE:  .\Objects\hex\main.obj (MAIN)
-    ADDRESS: 0026H
-
-Program Size: data=11.0 xdata=0 code=58
-LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)
+Program Size: data=11.0 xdata=0 code=494
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

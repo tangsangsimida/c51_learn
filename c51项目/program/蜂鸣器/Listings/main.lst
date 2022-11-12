@@ -1,35 +1,36 @@
-C51 COMPILER V9.54   MAIN                                                                  11/05/2022 19:47:30 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  11/12/2022 12:20:43 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\hex\main.obj
-COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\..\lib;..\..\lib\t
-                    -angsanglib) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\hex\main.obj)
+COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE Objects\code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND P
+                    -RINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\hex\main.obj)
 
 line level    source
 
    1          #include <REGX52.H>
-   2          #include "c51tangsang.h"
-   3          main()
-   4          {
-   5   1        while(1)
-   6   1        {
-   7   2          int i=20;
-   8   2          while(i--)
-   9   2          {
-  10   3            P2_5=1;
-  11   3            delay(100);
-  12   3            P2_5=0;
-  13   3            delay(100);
-  14   3          }
-  15   2          //教程此处有一个清零i的值，真不明白有什么用
-  16   2          P2_5=0;
+   2          #include <intrins.h>
+   3          #include "c51tangsang.h"
+   4          
+   5          
+   6          
+   7          void main()
+   8          {
+   9   1        int i;
+  10   1        while(1)
+  11   1        {
+  12   2          for(i=0;i<17;i++)
+  13   2          {
+  14   3            show_digital((i%10)+1,i);
+  15   3            delay(100);
+  16   3          }
   17   2        }
   18   1      }
+  19          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     43    ----
+   CODE SIZE        =     58    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

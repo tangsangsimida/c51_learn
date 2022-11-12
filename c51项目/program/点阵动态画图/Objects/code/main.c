@@ -1,23 +1,23 @@
-#include <REGX52.H>
+#include <REGX52.h>
 #include "c51tangsang.h"
 #include <string.h>
-sbit RCK  = P3^5;  //RCLK
-sbit SRCK = P3^6;  //ʱ�� SRCLK
-sbit SER  = P3^4;  //�������� SER
+sbit RCK  = P3^5;  //
+sbit SRCK = P3^6;  //
+sbit SER  = P3^4;  //
 
 unsigned char clum[]={0xFE,0x0E,0x0F,0x1E,0x10,0x11,0x18,0x92,0x10,0x20,0xA8,0x92,0x10,0x20,0x88,0x8E,
-0x10,0x20,0x88,0x82,0x10,0x11,0x88,0x92,0x10,0x0E,0x48,0x8E,0x10,0x00,0x00,0x00,}; //��ʾͼ�������,��̬��ʾͼ��
+0x10,0x20,0x88,0x82,0x10,0x11,0x88,0x92,0x10,0x0E,0x48,0x8E,0x10,0x00,0x00,0x00,}; //
 
 
 
 //д������
 void show_clum(unsigned char,unsigned char);
 static void write_byte(unsigned char);
-//�˴�������1ѡ�У���Ϊ��������.
+//
 static void write_byte(unsigned char byte)
 {
 	unsigned char i;
-	//�����ݷŽ��Ĵ������Ĵ���Ϊ����λ�����Ĵ�������& |ѹջʽ��ֵ
+	//
 	for(i=0;i<8;i++)
 	{
 		//�����λȡ����
@@ -27,16 +27,16 @@ static void write_byte(unsigned char byte)
 		SRCK =0;
 		SRCK =1;
 	}
-	//��Ҫһ�������ز��ܴ�������
+	//
 	RCK =1;
-	//�������ݺ���io���ֵ͵�ƽ��Ϊ��һ�δ���������׼��(��һ��������)
+	//
 	RCK =0;
 }
 void show_clum(unsigned char clum,unsigned char Data)
 {
 	write_byte(Data);
 	P0=~(0x80>>(clum-1));
-	//��Ϊ��������0ѡ��
+	//
 }
 //lattice_init
 void led_init()
@@ -47,7 +47,7 @@ void led_init()
 void main()
 {	
 	unsigned char cl;
-	//�ϵ�֮��Ƭ��������io���Ǹߵ�ƽ
+	//
 	led_init();
 	while(1)
 	{
