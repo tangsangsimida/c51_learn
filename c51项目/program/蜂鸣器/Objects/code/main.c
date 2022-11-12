@@ -6,14 +6,33 @@
 
 void main()
 {
-	int i;
 	while(1)
 	{
-		for(i=0;i<17;i++)
-		{
-			show_digital((i%10)+1,i);
-			delay(100);
-		}
+		
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+//void main()
+//{
+//	int i;
+//	while(1)
+//	{
+//		for(i=0;i<16;i++)
+//		{
+//			show_digital((i%8)+1,i);
+//			delay(100);
+//		}
+//	}
+//}

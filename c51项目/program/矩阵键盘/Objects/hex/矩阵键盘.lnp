@@ -1,0 +1,7 @@
+".\Objects\hex\main.obj",
+".\Objects\hex\lcd1602.obj",
+".\Objects\hex\public.obj",
+".\Objects\hex\c51tangsang.obj" 
+TO ".\Objects\hex\ОиеѓМќХЬ" 
+PRINT(".\Listings\ОиеѓМќХЬ.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 

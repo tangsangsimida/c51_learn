@@ -52,7 +52,7 @@ void show_digital(unsigned int th,unsigned int digital)
 	}
 	//上面的字码是共阳极的，所以直接取反，懒得写字码，直接百度的，结果发现是共阳极 的，潮。
 	P0=~digital_table[digital];
-	delay(2);
+	delay(1);
 	//消个抖
 	
 }
