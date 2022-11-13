@@ -1,5 +1,7 @@
 ".\Objects\hex\c51tangsang.obj",
-".\Objects\hex\main.obj" 
+".\Objects\hex\main.obj",
+".\Objects\hex\lcd1602.obj",
+".\Objects\hex\public.obj" 
 TO ".\Objects\hex\·äÃùÆ÷" 
 PRINT(".\Listings\·äÃùÆ÷.m51") RAMSIZE(256) 
 DISABLEWARNING (16) 

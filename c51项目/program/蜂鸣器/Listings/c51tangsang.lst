@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   C51TANGSANG                                                           11/12/2022 12:19:37 PAGE 1   
+C51 COMPILER V9.54   C51TANGSANG                                                           11/13/2022 16:25:08 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE C51TANGSANG
@@ -62,10 +62,10 @@ line level    source
   51   2          default:P2_2=0;P2_3=0;P2_4=0;P0=digital_table[digital];
   52   2        }
   53   1        //上面的字码是共阳极的，所以直接取反，懒得写字码，直接百度的，结果发现是共阳极 的，潮。
-C51 COMPILER V9.54   C51TANGSANG                                                           11/12/2022 12:19:37 PAGE 2   
+C51 COMPILER V9.54   C51TANGSANG                                                           11/13/2022 16:25:08 PAGE 2   
 
   54   1        P0=~digital_table[digital];
-  55   1        delay(2);
+  55   1        delay(1);
   56   1        //消个抖
   57   1        
   58   1      }
@@ -112,22 +112,35 @@ line level    source
   99   1        TR0=1; //定时器0的运行控制位
  100   1      }
  101          
- 102          //蜂鸣器x-ms频率
- 103          void Buzzer_on(uint ms)
+ 102          //延时函数，单位：us
+ 103          void delayus(unsigned int j)    //@12.000MHz
  104          {
- 105   1        for(;ms>=0;ms--)
- 106   1        {
- 107   2          Buzzer=!Buzzer;
- 108   2          delay(1);
- 109   2        }
- 110   1      } 
+ 105   1        unsigned char i;
+ 106   1        while(j--)
+ 107   1        {
+ 108   2          i = 2;
+ 109   2          while (--i);
+ 110   2        }
+ 111   1      }
+ 112          
+ 113          // uint i --->蜂鸣器一次声响的长度
+ 114          void beep(uint i)
+ 115          {
+C51 COMPILER V9.54   C51TANGSANG                                                           11/13/2022 16:25:08 PAGE 3   
+
+ 116   1          while(i--)
+ 117   1          {
+ 118   2            P2_5=0;
+ 119   2            delayus(20);//高电平的占用时间越长蜂鸣器的音调越高，
+ 120   2            P2_5=1;
+ 121   2            delayus(10);
+ 122   2          }
+ 123   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    266    ----
+   CODE SIZE        =    296    ----
    CONSTANT SIZE    =     16    ----
-C51 COMPILER V9.54   C51TANGSANG                                                           11/12/2022 12:19:37 PAGE 3   
-
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----

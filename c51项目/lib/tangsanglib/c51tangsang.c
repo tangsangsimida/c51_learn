@@ -99,12 +99,25 @@ void time_init()
 	TR0=1; //定时器0的运行控制位
 }
 
-//蜂鸣器x-ms频率
-void Buzzer_on(uint ms)
+//延时函数，单位：us
+void delayus(unsigned int j)		//@12.000MHz
 {
-	for(;ms>=0;ms--)
+	unsigned char i;
+	while(j--)
 	{
-		Buzzer=!Buzzer;
-		delay(1);
+		i = 2;
+		while (--i);
 	}
-}	
+}
+
+// uint i --->蜂鸣器一次声响的长度
+void beep(uint i)
+{
+		while(i--)
+		{
+			P2_5=0;
+			delayus(20);//高电平的占用时间越长蜂鸣器的音调越高，
+			P2_5=1;
+			delayus(10);
+		}
+}

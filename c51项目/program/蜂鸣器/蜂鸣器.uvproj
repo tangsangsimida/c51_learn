@@ -378,6 +378,26 @@
               <FileType>1</FileType>
               <FilePath>.\Objects\code\main.c</FilePath>
             </File>
+            <File>
+              <FileName>lcd1602.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Objects\code\lcd1602.c</FilePath>
+            </File>
+            <File>
+              <FileName>public.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Objects\code\public.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd1602.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Objects\code\lcd1602.h</FilePath>
+            </File>
+            <File>
+              <FileName>public.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Objects\code\public.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
