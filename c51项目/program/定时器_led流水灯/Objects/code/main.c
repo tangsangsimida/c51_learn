@@ -2,10 +2,10 @@
 unsigned int time_count=0;
 
 
-void time_init();//初始化计时器/定时器
+void time_0_init();//初始化计时器/定时器
 
 
-void time_init()
+void time_0_init()
 {
 	//TMOD = 0x01;//工作模式，不可位寻址，每一个位都有相应的含义，
 	TMOD&=0xF0;//上面的写法可能存在与另一个定时器冲突的情况；
@@ -37,7 +37,7 @@ void time_on() interrupt 1
 void main()
 {
 	P2=0xAA;
-	time_init();
+	time_0_init();
 	while(1)
 	{
 		
