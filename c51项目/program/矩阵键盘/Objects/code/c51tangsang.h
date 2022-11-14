@@ -25,7 +25,7 @@ typedef unsigned char uchar;
 
 void time_init();
 //定时器声明
-
+void delayus(unsigned int);
 extern void delay(unsigned int);
 //延时函数，单位ms
 
@@ -35,9 +35,18 @@ extern void show_digital(unsigned int th,unsigned int digital);
 extern void show_clum(unsigned char,unsigned char);
 //led点阵图按列显示1.显示的某一列，2.显示的数据，二进制。
 
-void Buzzer_on(uint ms);
-//蜂鸣器，1.频率
+void beep(uint i);
+//蜂鸣器发声一次，i->发声的时间长度
 
+void time_0_ms_init();
+//定时器0初始化，一毫秒溢出 优先级为 --> 1
+
+void time_1_ms_init();
+//定时器1初始化，一毫秒溢出 优先级为 --> 3
+
+void time_1_us_init();
+
+void time_0_us_init();
 #endif
 
 

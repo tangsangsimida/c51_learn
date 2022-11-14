@@ -38,11 +38,15 @@ extern void show_clum(unsigned char,unsigned char);
 void beep(uint i);
 //蜂鸣器发声一次，i->发声的时间长度
 
-void time_0_init();
+void time_0_ms_init();
 //定时器0初始化，一毫秒溢出 优先级为 --> 1
 
-void time_1_init();
+void time_1_ms_init();
 //定时器1初始化，一毫秒溢出 优先级为 --> 3
+
+void time_1_us_init();
+
+void time_0_us_init();
 #endif
 
 
