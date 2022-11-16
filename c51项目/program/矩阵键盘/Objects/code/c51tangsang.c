@@ -142,8 +142,7 @@ void time_1_ms_init()
 	TL1=64535%256;
 	TH1=64535/256;
 	TF1=0;//设置默认为未溢出	
-	
-	
+
 //	IE1=1;//中断开关
 //	IT1=1;
 	
@@ -161,8 +160,7 @@ void time_1_us_init()
 	TL1=65534%256;
 	TH1=65534/256;
 	TF1=0;//设置默认为未溢出	
-	
-	
+
 //	IE1=1;//中断开关
 //	IT1=1;
 	
@@ -185,4 +183,68 @@ void time_0_us_init()
 	EA=1;
 	PT0=0;
 	TR0=1; //定时器0的运行控制位
+}
+
+//读取独立按键状态
+uint buttom_getstate_4()
+{
+	if(P3_0==0)
+	{
+		delay(20);while(P3_0==0);delay(20);return 2;
+	}
+	if(P3_1==0)
+	{
+		delay(10);while(P3_1==0);delay(20);return 1;
+	}
+	if(P3_2==0)
+	{
+		delay(10);while(P3_2==0);delay(20);return 3;
+	}
+	if(P3_3==0)
+	{
+		delay(10);while(P3_3==0);delay(20);return 4;
+	}
+	return 0;
+}
+
+int buttom_getstate_16()
+{
+    int state=0;
+    P1=0xFF;
+    //先把P1全部置1，然后给对应io给0，一次判断
+    P1_3=0;
+    //矩阵键盘第一列--->判断最左边列
+    if(P1_7==0){ delay(50);while(P1_7==0);delay(20);state=1;}
+    if(P1_6==0){ delay(50);while(P1_7==0);delay(20);state=5;}
+    if(P1_5==0){ delay(50);while(P1_7==0);delay(20);state= 9;}
+    if(P1_4==0){ delay(50);while(P1_7==0);delay(20);state= 13;}
+
+    P1=0xFF;
+    //先把P1全部置1，然后给对应io给0，一次判断
+    P1_2=0;
+    //矩阵键盘第二列--->0100
+    if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 2;}
+    if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 6;}
+    if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 10;}
+    if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 14;}
+
+    P1=0xFF;
+    //先把P1全部置1，然后给对应io给0，一次判断
+    P1_1=0;
+    //矩阵键盘第二列--->0010
+    if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 3;}
+    if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 7;}
+    if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 11;}
+    if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 15;}
+
+    P1=0xFF;
+    //先把P1全部置1，然后给对应io给0，一次判断
+    P1_0=0;
+    //矩阵键盘第二列--->0001
+    if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 4;}
+    if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 8;}
+    if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 12;}
+    if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 16;}
+
+    return state;
 }

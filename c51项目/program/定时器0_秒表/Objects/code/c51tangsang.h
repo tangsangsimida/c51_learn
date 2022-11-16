@@ -23,8 +23,6 @@ typedef unsigned char uchar;
 #ifndef  _C51TANGSANG_H_
 #define  _C51TANGSANG_H_
 
-void time_init();
-//定时器声明
 void delayus(unsigned int);
 extern void delay(unsigned int);
 //延时函数，单位ms

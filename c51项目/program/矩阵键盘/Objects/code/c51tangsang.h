@@ -47,6 +47,15 @@ void time_1_ms_init();
 void time_1_us_init();
 
 void time_0_us_init();
+
+uint buttom_getstate_4();
+//获取独立按键状态
+
+int buttom_getstate_16();
+//获取矩阵键盘的状态码
+
+
+
 #endif
 
 

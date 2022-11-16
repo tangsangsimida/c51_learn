@@ -1,37 +1,42 @@
-C51 COMPILER V9.54   MAIN                                                                  11/12/2022 13:02:54 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  11/16/2022 22:48:40 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\hex\main.obj
 COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE Objects\code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND P
-                    -RINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\hex\main.obj)
+                    -RINT(.\Listings\main.lst) OBJECT(.\Objects\hex\main.obj)
 
 line level    source
 
    1          #include <REGX52.H>
    2          #include <intrins.h>
    3          #include "c51tangsang.h"
-   4          #include "lcd1602.h"
-   5          #include  "public.h"
+   4          #include "LCD1602_b.h"
+   5          
    6          
-   7          void main()
+   7          int  main()
    8          {
-   9   1        lcd1602_init();
-  10   1        lcd1602_show_string(3,0,"123");
-  11   1        while(1)
-  12   1        {
-  13   2          
-  14   2        }
-  15   1      }
-  16          
+   9   1          int buttom_16_state=0;
+  10   1              LCD_Init();
+  11   1              LCD_ShowString(1,1,"Input password:");
+  12   1          LCD_ShowNum(2,1,0,4);
+  13   1              while(1)
+  14   1              {
+  15   2              buttom_16_state=buttom_getstate_16();
+  16   2              if(buttom_16_state)
+  17   2              {
+  18   3                  LCD_ShowNum(2,1,buttom_16_state,4);
+  19   3              }
+  20   2              }
+  21   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     18    ----
-   CONSTANT SIZE    =      4    ----
+   CODE SIZE        =     63    ----
+   CONSTANT SIZE    =     16    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =   ----       2
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
