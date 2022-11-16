@@ -1,0 +1,94 @@
+C51 COMPILER V9.54   MAIN                                                                  11/15/2022 19:30:51 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\hex\main.obj
+COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE Objects\code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND P
+                    -RINT(.\Listings\main.lst) OBJECT(.\Objects\hex\main.obj)
+
+line level    source
+
+   1          #include <intrins.h>
+   2          #include "c51tangsang.h"
+   3          
+   4          uint buttom_getstate();
+   5          
+   6          void main()
+   7          {
+   8   1              static uint buttom_state=0;
+   9   1      //      time_0_ms_init();
+  10   1      //      P2=0xFE;
+  11   1              while(1)
+  12   1              {
+  13   2                      buttom_state=buttom_getstate();
+  14   2                      switch(buttom_state)
+  15   2                      {
+  16   3                              case 1: P2_0=~P2_0;break;
+  17   3                              case 2: P2_1=~P2_1;break;
+  18   3                              case 3: P2_2=~P2_2;break;
+  19   3                              case 4: P2_3=~P2_3;break;
+  20   3      //                      case 0: P2=0xFF;
+  21   3                      }
+  22   2              }
+  23   1      }
+  24          
+  25          
+  26          uint buttom_getstate()
+  27          {
+  28   1              if(P3_0==0)
+  29   1              {
+  30   2                      delay(20);
+  31   2                      while(P3_0==0);
+  32   2                      return 2;
+  33   2              }
+  34   1              if(P3_1==0)
+  35   1              {
+  36   2                      delay(20);
+  37   2                      while(P3_1==0);
+  38   2                      return 1;
+  39   2              }
+  40   1              if(P3_2==0)
+  41   1              {
+  42   2                      delay(20);
+  43   2                      while(P3_2==0);
+  44   2                      return 3;
+  45   2              }
+  46   1              if(P3_3==0)
+  47   1              {
+  48   2                      delay(20);
+  49   2                      while(P3_3==0);
+  50   2                      return 4;
+  51   2              }
+  52   1              return 0;
+  53   1      }
+  54          
+C51 COMPILER V9.54   MAIN                                                                  11/15/2022 19:30:51 PAGE 2   
+
+  55          
+  56          
+  57          //void P2_cror() interrupt 1
+  58          //{
+  59          //      static unsigned int i=0;
+  60          //      TH0=64535/256;//高八位数据     晶振12mhz，一个周期为1us，最大65535us，
+  61          //      TL0=64535%256;//低八位数据->64535 = 65535-1000; -> 1000us=1ms; 定时器单位为1ms
+  62          //      i++;
+  63          //      if(i==100)//一秒
+  64          //      {
+  65          //              i=0;
+  66          //              P2=_crol_(P2,1);
+  67          //      }
+  68          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    119    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,5 @@
+".\Objects\hex\main.obj",
+".\Objects\hex\c51tangsang.obj" 
+TO ".\Objects\hex\独立按键" 
+PRINT(".\Listings\独立按键.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 
