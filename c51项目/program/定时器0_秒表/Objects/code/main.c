@@ -18,15 +18,15 @@ void time_clear_0();
 uchar s=0,m=0,h=0;
 uint ms=0;
 uchar buttom_state=0;//判断是否进入计时器
-uchar time_begining=0;
+uchar time_begining=0;//time_begining ---->定时器是否在运行1on2off;
 uchar buttom_time_on_state=0;//在计时器中的按钮状态
 uchar buttom_jishi=0; //正在计时的时候的按键状态
 
 //需要实时更新状态的变量
 uchar time_on_start=0; //计时器是否正在计时1:在，0：不在
-uchar time_on=0;//是否在计时器界面；
+uchar time_on=0;//是否在计时器界面；1.在/ 0：不在
 
-//time_begining ---->定时器是否在运行1on2off;
+
 
 
 
@@ -40,7 +40,7 @@ int main()
 
 	while(1)
 	{
-
+begin:
         menu_main();
         //初始化开始菜单
 
@@ -79,7 +79,15 @@ int main()
                     {
                         show_time();
                         buttom_jishi=buttom_getstate_4()+1;
-                        if(buttom_jishi==2);
+                        if(buttom_jishi==2&&time_on_start==0)
+                        {
+                            //当没有计时的时候按1的话直接推出去，返回定时器窗口循环
+                            buttom_time_on_state=0;
+                            //将外部循环条件置为否
+                            LCD_clear();
+                            buttom_jishi=0;
+                            time_on=0;
+                        }
                         else if(buttom_jishi==3)
                         {
                             //计时器在计时，并且按下了按钮2，实现暂停功能;
@@ -99,16 +107,25 @@ int main()
                         else if(buttom_jishi==4)
                         {
                             //计时器在计时的同时，按下了按钮3，实现：将计时器置零，并且暂停计时；
+                            time_0_case=0;
+                            time_clear_0();
+                            time_on_start=0;
+
                         }
                         else if(buttom_jishi==5)
                         {
                             //计时器在计时的同时，按下了按钮4，实现:直接推出计时器，
                             // -->1.退出计时器之前应当关闭计时器，并将计时器置零
-                            time_0_case=0;// 将计时器暂停先，
-                            time_clear_0();
-                            time_on_start=0;
-                            buttom_state=0;
+//                            time_0_case=0;// 将计时器暂停先，
+//                            time_clear_0();
+//                            time_on_start=0;
+//                            buttom_state=0;
                             //将窗口循环条件置零，正常返回外层
+                            time_0_case=0;
+                            time_on_start=0;
+                            time_on=0;
+                            LCD_clear();
+                            goto begin;
                         }
                     }
 
@@ -120,6 +137,12 @@ int main()
                 else if(buttom_time_on_state==5)
                 {
                     //当前状态：在计数器中，并且按下第四个按键
+                    //更新状态
+                    time_0_case=0;
+                    time_on_start=0;
+                    time_on=0;
+                    LCD_clear();
+                    goto begin;
                 }
 
             }
@@ -129,6 +152,8 @@ int main()
 
 	}
 }
+
+
 void time_inter() interrupt 1
 {
     TH0=64535/256;//高八位数据     晶振12mhz，一个周期为1us，最大65535us，
@@ -178,4 +203,8 @@ void menu_main()
 void time_clear_0()
 {
     //作用：将计时器重置
+    h=0;
+    m=0;
+    s=0;
+    ms=0;
 }
