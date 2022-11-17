@@ -11,7 +11,8 @@ sbit RCK  = P3^5;  //
 sbit SRCK = P3^6;  //
 sbit SER  = P3^4;  //
 sbit Buzzer=P2^5; //蜂鸣器
- 
+sbit time_0_case=TCON^4;
+//定时器开关应该是默认为0的，即关闭状态
  
 //用宏将无符号的类型简化 
 typedef unsigned int uint;

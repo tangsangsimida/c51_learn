@@ -221,3 +221,8 @@ void LCD_ShowBinNum(unsigned char Line,unsigned char Column,unsigned int Number,
 		LCD_WriteData(Number/LCD_Pow(2,i-1)%2+'0');
 	}
 }
+void LCD_clear()
+{
+    LCD_ShowString(1,1,"                                                                     ");
+    LCD_ShowString(2,1,"                                                                     ");
+}
