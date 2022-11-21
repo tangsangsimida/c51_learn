@@ -1,0 +1,6 @@
+".\Objects\hex\c51tangsang.obj",
+".\Objects\hex\LCD1602_b.obj",
+".\Objects\hex\main.obj" 
+TO ".\Objects\hex\ledºôÎüµÆ" 
+PRINT(".\Listings\ledºôÎüµÆ.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 
