@@ -1,14 +1,13 @@
 #include <intrins.h>
 #include "c51tangsang.h"
 
-
-int ms=0;
+int ms=0,compare;
 
 //led呼吸灯
 int main()
 {
-    time_0_us_init();
-//    time_0_case=0;
+    time_0_ms_init();
+    compare=90;
 	while(1)
 	{
 //		for(i=0;i<100;i++)
@@ -23,7 +22,7 @@ int main()
 //		}
 //		for(i=100;i>0;i--)
 //		{
-//            for(count=0;count<15;count++)
+//            for(count=0;count<15;count++) 
 //            {
 //                P2_0=0;
 //                delayus(i);
@@ -34,26 +33,16 @@ int main()
 
 
 
-
 	}
 }
 
 void addnum() interrupt 1
 {
-    int i;
-    TL0 = 0xFF;		//设置定时初值
-    TH0 = 0xFF;		//设置定时初值
+    unsigned int bright_time,out_time;
+    TH0=64535/256;		//设置定时初值
+    TL0=64535%256;		//设置定时初值
 	ms++;
-    for(i=0;i<5;i++)
-    {
-        if(ms<95)
-        {
-            P2_0=0;
-        }
-        else
-        {
-            P2_0=1;
-        }
-    }
-    ms%=100;
+	ms%=100;
+
+
 }

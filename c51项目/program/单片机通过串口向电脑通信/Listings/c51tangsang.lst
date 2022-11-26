@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   C51TANGSANG                                                           11/20/2022 15:12:00 PAGE 1   
+C51 COMPILER V9.54   C51TANGSANG                                                           11/26/2022 15:55:01 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE C51TANGSANG
@@ -62,7 +62,7 @@ line level    source
   51   2                      default:P2_2=0;P2_3=0;P2_4=0;P0=digital_table[digital];
   52   2              }
   53   1              //上面的字码是共阳极的，所以直接取反，懒得写字码，直接百度的，结果发现是共阳极 的，潮。
-C51 COMPILER V9.54   C51TANGSANG                                                           11/20/2022 15:12:00 PAGE 2   
+C51 COMPILER V9.54   C51TANGSANG                                                           11/26/2022 15:55:01 PAGE 2   
 
   54   1              P0=~digital_table[digital];
   55   1              delay(1);
@@ -126,13 +126,13 @@ line level    source
  113   1              TMOD|=0x01;//用&|的方式赋值不会影响另一个定时器的运行
  114   1              TF0=0;//默认应该是0不配置不影响，避免一开始就产生中断;
  115   1              TH0=64535/256;//高八位数据     晶振12mhz，一个周期为1us，最大65535us，
-C51 COMPILER V9.54   C51TANGSANG                                                           11/20/2022 15:12:00 PAGE 3   
+C51 COMPILER V9.54   C51TANGSANG                                                           11/26/2022 15:55:01 PAGE 3   
 
  116   1              TL0=64535%256;//低八位数据->64535 = 65535-1000; -> 1000us=1ms; 定时器单位为1ms
  117   1              ET0=1;//三个中断系统的接口
  118   1              EA=1;
  119   1              PT0=0;
- 120   1              //TR0=1;//默认还是把计时器打开；
+ 120   1              TR0=1;//默认还是把计时器打开；
  121   1      }
  122          
  123          void time_1_ms_init()
@@ -182,80 +182,81 @@ line level    source
  167   1              ET0=1;//三个中断系统的接口
  168   1              EA=1;
  169   1              PT0=0;
- 170   1      }
- 171          
- 172          //读取独立按键状态
- 173          uint buttom_getstate_4()
- 174          {
- 175   1              if(P3_0==0)
- 176   1              {
- 177   2                      delay(20);while(P3_0==0);delay(20);return 2;
-C51 COMPILER V9.54   C51TANGSANG                                                           11/20/2022 15:12:00 PAGE 4   
+ 170   1              TR0=1;
+ 171   1      }
+ 172          
+ 173          //读取独立按键状态
+ 174          uint buttom_getstate_4()
+ 175          {
+ 176   1              if(P3_0==0)
+ 177   1              {
+C51 COMPILER V9.54   C51TANGSANG                                                           11/26/2022 15:55:01 PAGE 4   
 
- 178   2              }
- 179   1              if(P3_1==0)
- 180   1              {
- 181   2                      delay(10);while(P3_1==0);delay(20);return 1;
- 182   2              }
- 183   1              if(P3_2==0)
- 184   1              {
- 185   2                      delay(10);while(P3_2==0);delay(20);return 3;
- 186   2              }
- 187   1              if(P3_3==0)
- 188   1              {
- 189   2                      delay(10);while(P3_3==0);delay(20);return 4;
- 190   2              }
- 191   1              return 0;
- 192   1      }
- 193          
- 194          int buttom_getstate_16()
- 195          {
- 196   1          int state=0;
- 197   1          P1=0xFF;
- 198   1          //先把P1全部置1，然后给对应io给0，一次判断
- 199   1          P1_3=0;
- 200   1          //矩阵键盘第一列--->判断最左边列
- 201   1          if(P1_7==0){ delay(50);while(P1_7==0);delay(20);state=1;}
- 202   1          if(P1_6==0){ delay(50);while(P1_7==0);delay(20);state=5;}
- 203   1          if(P1_5==0){ delay(50);while(P1_7==0);delay(20);state= 9;}
- 204   1          if(P1_4==0){ delay(50);while(P1_7==0);delay(20);state= 13;}
- 205   1      
- 206   1          P1=0xFF;
- 207   1          //先把P1全部置1，然后给对应io给0，一次判断
- 208   1          P1_2=0;
- 209   1          //矩阵键盘第二列--->0100
- 210   1          if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 2;}
- 211   1          if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 6;}
- 212   1          if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 10;}
- 213   1          if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 14;}
- 214   1      
- 215   1          P1=0xFF;
- 216   1          //先把P1全部置1，然后给对应io给0，一次判断
- 217   1          P1_1=0;
- 218   1          //矩阵键盘第二列--->0010
- 219   1          if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 3;}
- 220   1          if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 7;}
- 221   1          if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 11;}
- 222   1          if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 15;}
- 223   1      
- 224   1          P1=0xFF;
- 225   1          //先把P1全部置1，然后给对应io给0，一次判断
- 226   1          P1_0=0;
- 227   1          //矩阵键盘第二列--->0001
- 228   1          if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 4;}
- 229   1          if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 8;}
- 230   1          if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 12;}
- 231   1          if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 16;}
- 232   1      
- 233   1          return state;
- 234   1      }
+ 178   2                      delay(20);while(P3_0==0);delay(20);return 2;
+ 179   2              }
+ 180   1              if(P3_1==0)
+ 181   1              {
+ 182   2                      delay(10);while(P3_1==0);delay(20);return 1;
+ 183   2              }
+ 184   1              if(P3_2==0)
+ 185   1              {
+ 186   2                      delay(10);while(P3_2==0);delay(20);return 3;
+ 187   2              }
+ 188   1              if(P3_3==0)
+ 189   1              {
+ 190   2                      delay(10);while(P3_3==0);delay(20);return 4;
+ 191   2              }
+ 192   1              return 0;
+ 193   1      }
+ 194          
+ 195          int buttom_getstate_16()
+ 196          {
+ 197   1          int state=0;
+ 198   1          P1=0xFF;
+ 199   1          //先把P1全部置1，然后给对应io给0，一次判断
+ 200   1          P1_3=0;
+ 201   1          //矩阵键盘第一列--->判断最左边列
+ 202   1          if(P1_7==0){ delay(50);while(P1_7==0);delay(20);state=1;}
+ 203   1          if(P1_6==0){ delay(50);while(P1_7==0);delay(20);state=5;}
+ 204   1          if(P1_5==0){ delay(50);while(P1_7==0);delay(20);state= 9;}
+ 205   1          if(P1_4==0){ delay(50);while(P1_7==0);delay(20);state= 13;}
+ 206   1      
+ 207   1          P1=0xFF;
+ 208   1          //先把P1全部置1，然后给对应io给0，一次判断
+ 209   1          P1_2=0;
+ 210   1          //矩阵键盘第二列--->0100
+ 211   1          if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 2;}
+ 212   1          if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 6;}
+ 213   1          if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 10;}
+ 214   1          if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 14;}
+ 215   1      
+ 216   1          P1=0xFF;
+ 217   1          //先把P1全部置1，然后给对应io给0，一次判断
+ 218   1          P1_1=0;
+ 219   1          //矩阵键盘第二列--->0010
+ 220   1          if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 3;}
+ 221   1          if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 7;}
+ 222   1          if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 11;}
+ 223   1          if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 15;}
+ 224   1      
+ 225   1          P1=0xFF;
+ 226   1          //先把P1全部置1，然后给对应io给0，一次判断
+ 227   1          P1_0=0;
+ 228   1          //矩阵键盘第二列--->0001
+ 229   1          if(P1_7==0){ delay(20);while(P1_7==0);delay(20);state= 4;}
+ 230   1          if(P1_6==0){ delay(20);while(P1_7==0);delay(20);state= 8;}
+ 231   1          if(P1_5==0){ delay(20);while(P1_7==0);delay(20);state= 12;}
+ 232   1          if(P1_4==0){ delay(20);while(P1_7==0);delay(20);state= 16;}
+ 233   1      
+ 234   1          return state;
+ 235   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    748    ----
-   CONSTANT SIZE    =     16    ----
-C51 COMPILER V9.54   C51TANGSANG                                                           11/20/2022 15:12:00 PAGE 5   
+   CODE SIZE        =    752    ----
+C51 COMPILER V9.54   C51TANGSANG                                                           11/26/2022 15:55:01 PAGE 5   
 
+   CONSTANT SIZE    =     16    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
