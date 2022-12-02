@@ -20,6 +20,10 @@ typedef unsigned char uchar;
 
 
 
+extern uchar date_uart;//用来实时监听接受到的数据
+
+
+
 
 #ifndef  _C51TANGSANG_H_
 #define  _C51TANGSANG_H_
@@ -34,30 +38,36 @@ extern void show_digital(unsigned int th,unsigned int digital);
 extern void show_clum(unsigned char,unsigned char);
 //led点阵图按列显示1.显示的某一列，2.显示的数据，二进制。
 
-void beep(uint i);
+extern void beep(uint i);
 //蜂鸣器发声一次，i->发声的时间长度
 
-void time_0_ms_init();
+extern void time_0_ms_init();
 //定时器0初始化，一毫秒溢出 优先级为 --> 1
 
-void time_1_ms_init();
+extern void time_1_ms_init();
 //定时器1初始化，一毫秒溢出 优先级为 --> 3
 
-void time_1_us_init();
+extern void time_1_us_init();
 
-void time_0_us_init();
+extern void time_0_us_init();
 
-uint buttom_getstate_4();
+extern uint buttom_getstate_4();
 //获取独立按键状态
 
-int buttom_getstate_16();
+extern int buttom_getstate_16();
 //获取矩阵键盘的状态码
 
-void uart_init(void)
+extern void uart_init();
 //串口初始化4800波特率
 
-void uart_sendbyte(unsigned char)
+extern void uart_sendbyte(unsigned char);
 //单片机发送数据
+
+extern void uart_getdata();
+/*
+ * uart接收数据
+ * 串口接收数据会触发中断，跟程序耦合性很大，函数相当于一个模板
+ * */
 
 
 #endif

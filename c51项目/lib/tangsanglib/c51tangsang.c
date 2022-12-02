@@ -234,7 +234,7 @@ int buttom_getstate_16()
     return state;
 }
 //4800波特率串口初始化
-void uart_init(void)		//4800bps@11.0592MHz
+void uart_init()		//4800bps@11.0592MHz
 {
     PCON &= 0x7F;		//波特率不倍速
     SCON = 0x50;		//8位数据,可变波特率
@@ -246,6 +246,8 @@ void uart_init(void)		//4800bps@11.0592MHz
     TH1 = 0xFA;		//设定定时器重装值
     ET1 = 0;		//禁止定时器1中断
     TR1 = 1;		//启动定时器1
+    EA = 1;    //启动所有中断
+    ES = 1;    //启动串口中断
 }
 
 //单片机发送数据
@@ -255,3 +257,13 @@ void uart_sendbyte(unsigned char byte)
     while(TI==0);
     TI=0;
 }
+
+void uart_getdata() interrupt 4
+{
+    if(RI==1)//单片机接收到数据发生中断
+    {
+        RI=0;//软件重置中断开关
+        date_uart=SBUF;//接收数据
+    }
+}
+//uart接收数据
