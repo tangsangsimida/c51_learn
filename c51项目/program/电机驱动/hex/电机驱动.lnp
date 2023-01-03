@@ -1,0 +1,6 @@
+".\hex\main.obj",
+".\hex\c51tangsang.obj",
+".\hex\LCD1602_b.obj" 
+TO ".\hex\电机驱动" 
+PRINT(".\Listings\电机驱动.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 
