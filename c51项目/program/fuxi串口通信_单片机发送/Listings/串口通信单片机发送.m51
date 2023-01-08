@@ -1,0 +1,148 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/08/2023  18:28:25  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\SOFTWARE\KEIL5\C51\BIN\BL51.EXE .\Objects\hex\main.obj TO .\Objects\hex\串口通信单片机发送 PRINT (.\Listings\串口通信
+>> 单片机发送.m51) RAMSIZE (256) DISABLEWARNING (16)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\hex\main.obj (MAIN)
+  D:\SOFTWARE\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\hex\串口通信单片机发送 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     001BH     UNIT         ?PR?UARTINIT?MAIN
+            CODE    001EH     0005H     UNIT         ?PR?MAIN?MAIN
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     0019H     UNIT         ?PR?RECEPTIONBYTE?MAIN
+            CODE    003FH     000CH     UNIT         ?C_C51STARTUP
+            CODE    004BH     0009H     UNIT         ?PR?DELAY1MS?MAIN
+            CODE    0054H     0008H     UNIT         ?PR?_UART_SENDBYTE?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\hex\串口通信单片机发送 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?RECEPTIONBYTE?MAIN
+  +--> ?PR?_UART_SENDBYTE?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?UARTINIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\hex\串口通信单片机发送 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/08/2023  18:28:25  PAGE 2
+
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:004BH         PUBLIC        Delay1ms
+  B:00A8H.7       PUBLIC        EA
+  B:00A8H.4       PUBLIC        ES
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:001EH         PUBLIC        main
+  D:0087H         PUBLIC        PCON
+  D:0098H         PUBLIC        SCON
+  C:0003H         PUBLIC        UartInit
+  D:0089H         PUBLIC        TMOD
+  C:0054H         PUBLIC        _Uart_sendByte
+  C:0026H         PUBLIC        ReceptionByte
+  B:00A8H.3       PUBLIC        ET1
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  B:0088H.6       PUBLIC        TR1
+  D:0099H         PUBLIC        buffer
+  -------         PROC          UARTINIT
+  C:0003H         LINE#         7
+  C:0003H         LINE#         8
+  C:0003H         LINE#         9
+  C:0006H         LINE#         10
+  C:0009H         LINE#         11
+  C:000CH         LINE#         12
+  C:000FH         LINE#         13
+  C:0012H         LINE#         14
+  C:0015H         LINE#         15
+  C:0017H         LINE#         16
+  C:0019H         LINE#         17
+  C:001BH         LINE#         18
+  C:001DH         LINE#         19
+  -------         ENDPROC       UARTINIT
+  -------         PROC          _UART_SENDBYTE
+  D:0007H         SYMBOL        Byte
+  C:0054H         LINE#         22
+  C:0054H         LINE#         23
+  C:0054H         LINE#         24
+  C:0056H         LINE#         25
+  C:0059H         LINE#         26
+  C:005BH         LINE#         27
+  -------         ENDPROC       _UART_SENDBYTE
+  -------         PROC          DELAY1MS
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0006H         SYMBOL        j
+  -------         ENDDO         
+  C:004BH         LINE#         29
+  C:004BH         LINE#         30
+  C:004BH         LINE#         33
+  C:004DH         LINE#         34
+  C:004FH         LINE#         36
+  C:004FH         LINE#         37
+  C:0051H         LINE#         38
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/08/2023  18:28:25  PAGE 3
+
+
+  C:0053H         LINE#         39
+  -------         ENDPROC       DELAY1MS
+  -------         PROC          RECEPTIONBYTE
+  C:0026H         LINE#         41
+  C:002DH         LINE#         43
+  C:0030H         LINE#         44
+  C:0033H         LINE#         45
+  C:0033H         LINE#         47
+  C:0038H         LINE#         48
+  C:003AH         LINE#         49
+  C:003AH         LINE#         52
+  -------         ENDPROC       RECEPTIONBYTE
+  -------         PROC          MAIN
+  C:001EH         LINE#         54
+  C:001EH         LINE#         55
+  C:001EH         LINE#         57
+  C:0021H         LINE#         59
+  C:0021H         LINE#         60
+  C:0021H         LINE#         62
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=92
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

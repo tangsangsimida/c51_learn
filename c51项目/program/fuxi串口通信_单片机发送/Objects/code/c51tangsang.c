@@ -260,7 +260,7 @@ void uart_sendbyte(unsigned char byte)
 
 void uart_getdata() interrupt 4
 {
-    if(RI==1)//收到数据和发送数据都有中断，判断是否为接收中断；
+    if(RI==1)//单片机接收到数据发生中断
     {
         RI=0;//软件重置中断开关
         date_uart=SBUF;//接收数据

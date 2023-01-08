@@ -1,0 +1,4 @@
+".\Objects\hex\main.obj" 
+TO ".\Objects\hex\串口通信单片机发送" 
+PRINT(".\Listings\串口通信单片机发送.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 
