@@ -1,0 +1,64 @@
+C51 COMPILER V9.54   MAIN                                                                  01/26/2023 14:13:53 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\hex\main.obj
+COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\main.lst) OBJECT(.\hex\main.obj)
+
+line level    source
+
+   1          #include <intrins.h>
+   2          #include "c51tangsang.h"
+   3          #include "LCD1602_b.h"
+   4          
+   5          char counter=0,counpare=0,button=0;
+   6          char before=0,after=0;
+   7          
+   8          void time_0_ms() interrupt 1
+   9          {
+  10   1          TH0=64535/256;
+  11   1          TL0=64535%256;
+  12   1          counter++;
+  13   1              counter%=100;
+  14   1          if(counter>=100-counpare/2 || counter <=(100+counpare/2)%100)
+  15   1          {
+  16   2              P1_0=1;
+  17   2          }
+  18   1          else
+  19   1          {
+  20   2              P1_0=0;
+  21   2          }
+  22   1      
+  23   1      }
+  24          
+  25          int main()
+  26          {
+  27   1          LCD_Init();
+  28   1          time_0_ms_init();
+  29   1              while(1)
+  30   1              {
+  31   2              LCD_ShowNum(1,2,button,1);
+  32   2              if(buttom_getstate_4())
+  33   2                              button++;
+  34   2              button%=4;
+  35   2              if(button==1){counpare=35;}
+  36   2              if(button==2){counpare=70;}
+  37   2              if(button==3){counpare=100;}
+  38   2              if(button==0){counpare=0;}
+  39   2              }
+  40   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    208    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
