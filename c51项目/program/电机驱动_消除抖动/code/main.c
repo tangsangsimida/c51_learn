@@ -1,6 +1,6 @@
-#include <intrins.h>
 #include "c51tangsang.h"
 #include "LCD1602_b.h"
+#include <intrins.h>
 
 char counter=0,counpare=0,button=0;
 char before=0,after=0;
