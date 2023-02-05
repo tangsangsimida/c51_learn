@@ -3,5 +3,6 @@
         "c51tangsang.h": "c",
         "intrins.h": "c",
         "INTRINS.H": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
