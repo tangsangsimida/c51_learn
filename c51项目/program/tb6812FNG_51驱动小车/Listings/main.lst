@@ -1,0 +1,106 @@
+C51 COMPILER V9.54   MAIN                                                                  02/11/2023 15:36:41 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\hex\main.obj
+COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\main.lst) OBJECT(.\Objects\hex\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "c51tangsang.h"
+   3          
+   4          void Delay(unsigned char);
+   5          void Trolley_power(void);
+   6          
+   7          sbit PWM_left_behind = P3^0; //PWM
+   8          sbit STBY_left = P3^2;           //芯片工作状态
+   9          sbit IN1_left_behind = P3^2; //IN1
+  10          sbit IN2_left_behind = P3^3; //IN2
+  11          
+  12          unsigned char compare=15,conter=0;
+  13          
+  14          //pwm给0代表刹车
+  15          
+  16          int main ()
+  17          {
+  18   1              //time_0_init()
+  19   1              time_0_ms_init();
+  20   1              IN2_left_behind = 0;
+  21   1              while(1)
+  22   1              {
+  23   2                      //正转
+  24   2      //              STBY_left = 1; //电机驱动芯片开始工作
+  25   2      //              PWM_left_behind =1; //pwm输入，可以直接全功率输入---->置1
+  26   2      //              //电机旋转方向------>正反转
+  27   2      //              //00------->自由停车
+  28   2      //              //10------->反转
+  29   2      //              //01------->正转
+  30   2      //              //11------->刹车
+  31   2      //              IN1_left_behind = 0;
+  32   2      //              IN2_left_behind = 1;
+  33   2      //              Delay(1000);
+  34   2      //              
+  35   2      //              //刹车
+  36   2      //              IN1_left_behind = 1;
+  37   2      //              IN2_left_behind = 1;
+  38   2      //              Delay(1000);
+  39   2      //              
+  40   2                      //反转
+  41   2      //              IN1_left_behind = 1;
+  42   2      //              IN2_left_behind = 0;
+  43   2      //              Delay(1000);
+  44   2      
+  45   2                      
+  46   2              }
+  47   1      }
+  48          void Trolley_power(void) interrupt 1
+  49          {
+  50   1              TH0=65435/256;//高八位数据     晶振12mhz，一个周期为1us，最大65535us，
+  51   1              TL0=65435%256;//低八位数据->64535 = 65535-1000; -> 1000us=1ms; 定时器单位为1ms
+  52   1              conter++;
+  53   1              conter%=100;
+  54   1              if(conter<compare)
+C51 COMPILER V9.54   MAIN                                                                  02/11/2023 15:36:41 PAGE 2   
+
+  55   1              {
+  56   2                      IN1_left_behind = 1;
+  57   2                      P2=0;
+  58   2              }
+  59   1              else
+  60   1              {
+  61   2                      IN1_left_behind = 0;
+  62   2                      P2=1;
+  63   2              }
+  64   1              
+  65   1      }
+  66          // ms
+  67          //void Delay(unsigned char num) 
+  68          //{
+  69          //      unsigned char i, j;
+  70          
+  71          //      while(num--)
+  72          //      {
+  73          //              i = 2;
+  74          //              j = 239;
+  75          //              do
+  76          //              {
+  77          //                      while (--j);
+  78          //              } while (--i);
+  79          //      }
+  80          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     56    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
