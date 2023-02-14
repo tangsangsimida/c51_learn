@@ -1,0 +1,5 @@
+".\Objects\hex\main.obj",
+".\Objects\hex\c51tangsang.obj" 
+TO ".\Objects\hex\program" 
+PRINT(".\Listings\program.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 

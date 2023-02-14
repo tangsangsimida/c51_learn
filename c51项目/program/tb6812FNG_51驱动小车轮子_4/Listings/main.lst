@@ -1,0 +1,115 @@
+C51 COMPILER V9.54   MAIN                                                                  02/14/2023 18:21:40 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\hex\main.obj
+COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\main.lst) OBJECT(.\Objects\hex\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "c51tangsang.h"
+   3          
+   4          void Delay(unsigned char);
+   5          void Trolley_power(void);
+   6          
+   7          // 左后方轮子
+   8          sbit PWM_left_behind = P3^0; //PWM1
+   9          sbit STBY_left = P3^1;           //芯片工作状态
+  10          sbit IN1_left_behind = P3^2; //IN1
+  11          sbit IN2_left_behind = P3^3; //IN2
+  12          // 右后方轮子
+  13          sbit PWM_right_behind = P2^0; //PWM2
+  14          sbit STBY_right = P2^1;          //芯片工作状态2
+  15          sbit IN1_right_behind = P2^3; //IN1_2
+  16          sbit IN2_right_behind = P2^2; //IN2_2
+  17          // 左前方轮子
+  18          sbit PWM_left_front = P0^2; //PWM3
+  19          //sbit STBY_right = P2^1;                //芯片工作状态2
+  20          sbit IN1_left_front = P0^0; //IN1_2
+  21          sbit IN2_left_front = P0^1; //IN2_2
+  22          // 右前方轮子
+  23          sbit PWM_right_front = P2^6; //PWM4
+  24          //sbit STBY_right = P2^1;                //芯片工作状态2
+  25          sbit IN1_right_front = P2^4; //IN1_2
+  26          sbit IN2_right_front = P2^5; //IN2_2
+  27          
+  28          
+  29          unsigned char compare1=20,conter1=0;
+  30          
+  31          //pwm给0代表刹车
+  32          
+  33          int main ()
+  34          {
+  35   1              //time_0_init()
+  36   1              time_0_ms_init();
+  37   1              
+  38   1              
+  39   1              IN2_left_behind = 1;
+  40   1              IN2_right_behind = 0;
+  41   1              IN2_left_front = 0;
+  42   1              IN2_right_front = 1;
+  43   1              
+  44   1              
+  45   1              PWM_right_behind=1;
+  46   1              PWM_right_front = 1;
+  47   1              PWM_left_behind=1;
+  48   1              PWM_left_front = 1;
+  49   1              STBY_left = 1;
+  50   1              STBY_right=1;
+  51   1              while(1)
+  52   1              {
+  53   2                      //正转
+  54   2      //              STBY_left = 1; //电机驱动芯片开始工作
+C51 COMPILER V9.54   MAIN                                                                  02/14/2023 18:21:40 PAGE 2   
+
+  55   2      //              PWM_left_behind =1; //pwm输入，可以直接全功率输入---->置1
+  56   2      //              //电机旋转方向------>正反转
+  57   2      //              //00------->自由停车
+  58   2      //              //10------->正转
+  59   2      //              //01------->反转
+  60   2      //              //11------->刹车
+  61   2      
+  62   2                      
+  63   2              }
+  64   1      }
+  65          void Trolley_power(void) interrupt 1
+  66          {
+  67   1              TH0=64535/256;//高八位数据     晶振12mhz，一个周期为1us，最大65535us，
+  68   1              TL0=64535%256;//低八位数据->64535 = 65535-1000; -> 1000us=1ms; 定时器单位为1ms
+  69   1              conter1++;
+  70   1              conter1%=100;
+  71   1              if(conter1<compare1)
+  72   1              {
+  73   2                      IN1_left_behind = 0;
+  74   2                      IN1_right_behind =1;
+  75   2                      IN1_left_front = 1;
+  76   2                      IN1_right_front = 0;
+  77   2                      
+  78   2              }
+  79   1              else
+  80   1              {
+  81   2                      IN1_left_behind = 0;
+  82   2                      IN1_right_behind = 0;
+  83   2                      IN1_left_front = 0;
+  84   2                      IN1_right_front = 0;
+  85   2                      
+  86   2              }
+  87   1      
+  88   1              
+  89   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     80    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
