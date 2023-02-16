@@ -1,0 +1,6 @@
+".\Objects\hex\main.obj",
+".\Objects\hex\c51tangsang.obj",
+".\Objects\hex\the_auto_turn_where.obj" 
+TO ".\Objects\hex\program" 
+PRINT(".\Listings\program.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 
