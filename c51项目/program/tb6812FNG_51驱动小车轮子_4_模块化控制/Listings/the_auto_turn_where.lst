@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   THE_AUTO_TURN_WHERE                                                   02/16/2023 18:17:04 PAGE 1   
+C51 COMPILER V9.54   THE_AUTO_TURN_WHERE                                                   02/16/2023 23:16:31 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE THE_AUTO_TURN_WHERE
@@ -8,88 +8,129 @@ COMPILER INVOKED BY: D:\software\keil5\C51\BIN\C51.EXE code\the_auto_turn_where.
 
 line level    source
 
-   1          #include <REGX52.H>
-   2          sbit PWM_left_behind = P3^0; //PWM1
-   3          sbit STBY_left = P3^1;           //芯片工作状态
-   4          sbit IN1_left_behind = P3^2; //IN1
-   5          sbit IN2_left_behind = P3^3; //IN2
-   6          // 右后方轮子
-   7          sbit PWM_right_behind = P2^0; //PWM2
-   8          sbit STBY_right = P2^1;          //芯片工作状态2
-   9          sbit IN1_right_behind = P2^3; //IN1_2
-  10          sbit IN2_right_behind = P2^2; //IN2_2
-  11          // 左前方轮子
-  12          sbit PWM_left_front = P0^2; //PWM3
-  13          //sbit STBY_right = P2^1;                //芯片工作状态2
-  14          sbit IN1_left_front = P0^0; //IN1_2
-  15          sbit IN2_left_front = P0^1; //IN2_2
-  16          // 右前方轮子
-  17          sbit PWM_right_front = P2^6; //PWM4
-  18          //sbit STBY_right = P2^1;                //芯片工作状态2
-  19          sbit IN1_right_front = P2^4; //IN1_2
-  20          sbit IN2_right_front = P2^5; //IN2_2
-  21          
+   1          #include "the_auto_turn_where.h"
+   2          
+   3          sbit PWM_left_behind = P3^0; //PWM1
+   4          sbit STBY_left = P3^1;           //芯片工作状态
+   5          sbit IN1_left_behind = P3^2; //IN1
+   6          sbit IN2_left_behind = P3^3; //IN2
+   7          // 右后方轮子
+   8          sbit PWM_right_behind = P2^0; //PWM2
+   9          sbit STBY_right = P2^1;          //芯片工作状态2
+  10          sbit IN1_right_behind = P2^3; //IN1_2
+  11          sbit IN2_right_behind = P2^2; //IN2_2
+  12          // 左前方轮子
+  13          sbit PWM_left_front = P0^2; //PWM3
+  14          //sbit STBY_right = P2^1;                //芯片工作状态2
+  15          sbit IN1_left_front = P0^0; //IN1_2
+  16          sbit IN2_left_front = P0^1; //IN2_2
+  17          // 右前方轮子
+  18          sbit PWM_right_front = P2^6; //PWM4
+  19          //sbit STBY_right = P2^1;                //芯片工作状态2
+  20          sbit IN1_right_front = P2^4; //IN1_2
+  21          sbit IN2_right_front = P2^5; //IN2_2
   22          
-  23          unsigned char  State_In1_left_front = 1;
-  24          unsigned char  State_In2_left_front = 1;
-  25          unsigned char  State_In1_right_front = 1;
-  26          unsigned char  State_In2_right_front = 1;
-  27          unsigned char  State_In1_left_behind = 1;
-  28          unsigned char  State_In2_left_behind = 1;
-  29          unsigned char  State_In1_right_behind = 1;
-  30          unsigned char  State_In2_right_behind = 1;
-  31          void go_along (void)
-  32          {
-  33   1              State_In1_left_front = 0;
-  34   1              State_In2_left_front = 1;
-  35   1              State_In1_right_front = 0;
-  36   1              State_In2_right_front = 1;
-  37   1              State_In1_left_behind = 0;
-  38   1              State_In2_left_behind = 1;
-  39   1              State_In1_right_behind = 0;
-  40   1              State_In2_right_behind = 1;
-  41   1      }
-  42          void go_back (void)
-  43          {
-  44   1              State_In1_left_front = 1;
-  45   1              State_In2_left_front = 0;
-  46   1              State_In1_right_front = 1;
-  47   1              State_In2_right_front = 0;
-  48   1              State_In1_left_behind = 1;
-  49   1              State_In2_left_behind = 0;
-  50   1              State_In1_right_behind = 1;
-  51   1              State_In2_right_behind = 0;
-  52   1      }
-  53          void go_left(void)
-  54          {
-C51 COMPILER V9.54   THE_AUTO_TURN_WHERE                                                   02/16/2023 18:17:04 PAGE 2   
+  23          
+  24          unsigned char  State_In1_left_front = 1;
+  25          unsigned char  State_In2_left_front = 1;
+  26          unsigned char  State_In1_right_front = 1;
+  27          unsigned char  State_In2_right_front = 1;
+  28          unsigned char  State_In1_left_behind = 1;
+  29          unsigned char  State_In2_left_behind = 1;
+  30          unsigned char  State_In1_right_behind = 1;
+  31          unsigned char  State_In2_right_behind = 1;
+  32          
+  33          //具体运动轨迹没有测试，以下各个参数均没有测试。
+  34          void go_along (void)
+  35          {
+  36   1              //向钱移动
+  37   1              State_In1_left_front = 0;
+  38   1              State_In2_left_front = 1;
+  39   1              State_In1_right_front = 0;
+  40   1              State_In2_right_front = 1;
+  41   1              State_In1_left_behind = 0;
+  42   1              State_In2_left_behind = 1;
+  43   1              State_In1_right_behind = 0;
+  44   1              State_In2_right_behind = 1;
+  45   1      }
+  46          void go_back (void)
+  47          {
+  48   1              //向后移动
+  49   1              State_In1_left_front = 1;
+  50   1              State_In2_left_front = 0;
+  51   1              State_In1_right_front = 1;
+  52   1              State_In2_right_front = 0;
+  53   1              State_In1_left_behind = 1;
+  54   1              State_In2_left_behind = 0;
+C51 COMPILER V9.54   THE_AUTO_TURN_WHERE                                                   02/16/2023 23:16:31 PAGE 2   
 
-  55   1              
-  56   1      }
-  57          void go_right(void)
-  58          {
-  59   1              
-  60   1      }
-  61          void turn_left(void)
-  62          {
-  63   1              
-  64   1      }
-  65          void turn_right(void)
-  66          {
-  67   1              
-  68   1      }
-  69          void stop(void)
-  70          {
-  71   1              
-  72   1      }
-  73          void brake(void)
-  74          {
-  75   1      
-  76   1      }
+  55   1              State_In1_right_behind = 1;
+  56   1              State_In2_right_behind = 0;
+  57   1      }
+  58          void go_left(void)
+  59          {
+  60   1              //向左移动
+  61   1              State_In1_left_front = 0;
+  62   1              State_In2_left_front = 1;
+  63   1              State_In1_right_front = 0;
+  64   1              State_In2_right_front = 1;
+  65   1              State_In1_left_behind = 0;
+  66   1              State_In2_left_behind = 1;
+  67   1              State_In1_right_behind = 0;
+  68   1              State_In2_right_behind = 1;
+  69   1      }
+  70          void go_right(void)
+  71          {
+  72   1              //向右移动
+  73   1              State_In1_left_front = 0;
+  74   1              State_In2_left_front = 1;
+  75   1              State_In1_right_front = 0;
+  76   1              State_In2_right_front = 1;
+  77   1              State_In1_left_behind = 0;
+  78   1              State_In2_left_behind = 1;
+  79   1              State_In1_right_behind = 0;
+  80   1              State_In2_right_behind = 1;
+  81   1      }
+  82          void turn_left(void)
+  83          {
+  84   1              //左转
+  85   1              
+  86   1      }
+  87          void turn_right(void)
+  88          {
+  89   1              //右转
+  90   1              
+  91   1      }
+  92          void stop(void)
+  93          {
+  94   1              //停止
+  95   1              State_In1_left_front = 0;
+  96   1              State_In2_left_front = 0;
+  97   1              State_In1_right_front = 0;
+  98   1              State_In2_right_front = 0;
+  99   1              State_In1_left_behind = 0;
+ 100   1              State_In2_left_behind = 0;
+ 101   1              State_In1_right_behind = 0;
+ 102   1              State_In2_right_behind = 0;
+ 103   1      }
+ 104          void brake(void)
+ 105          {
+ 106   1              //刹车
+ 107   1              State_In1_left_front = 1;
+ 108   1              State_In2_left_front = 1;
+ 109   1              State_In1_right_front = 1;
+ 110   1              State_In2_right_front = 1;
+ 111   1              State_In1_left_behind = 1;
+ 112   1              State_In2_left_behind = 1;
+ 113   1              State_In1_right_behind = 1;
+ 114   1              State_In2_right_behind = 1;
+ 115   1      }
+
+C51 COMPILER V9.54   THE_AUTO_TURN_WHERE                                                   02/16/2023 23:16:31 PAGE 3   
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     50    ----
+   CODE SIZE        =    133    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

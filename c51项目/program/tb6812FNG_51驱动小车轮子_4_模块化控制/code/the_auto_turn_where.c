@@ -1,4 +1,5 @@
-#include <REGX52.H>
+#include "the_auto_turn_where.h"
+
 sbit PWM_left_behind = P3^0; //PWM1
 sbit STBY_left = P3^1;		 //芯片工作状态
 sbit IN1_left_behind = P3^2; //IN1
@@ -28,8 +29,11 @@ unsigned char  State_In1_left_behind = 1;
 unsigned char  State_In2_left_behind = 1;
 unsigned char  State_In1_right_behind = 1;
 unsigned char  State_In2_right_behind = 1;
+
+//具体运动轨迹没有测试，以下各个参数均没有测试。
 void go_along (void)
 {
+	//向钱移动
 	State_In1_left_front = 0;
 	State_In2_left_front = 1;
 	State_In1_right_front = 0;
@@ -41,6 +45,7 @@ void go_along (void)
 }
 void go_back (void)
 {
+	//向后移动
 	State_In1_left_front = 1;
 	State_In2_left_front = 0;
 	State_In1_right_front = 1;
@@ -52,25 +57,59 @@ void go_back (void)
 }
 void go_left(void)
 {
-	
+	//向左移动
+	State_In1_left_front = 0;
+	State_In2_left_front = 1;
+	State_In1_right_front = 0;
+	State_In2_right_front = 1;
+	State_In1_left_behind = 0;
+	State_In2_left_behind = 1;
+	State_In1_right_behind = 0;
+	State_In2_right_behind = 1;
 }
 void go_right(void)
 {
-	
+	//向右移动
+	State_In1_left_front = 0;
+	State_In2_left_front = 1;
+	State_In1_right_front = 0;
+	State_In2_right_front = 1;
+	State_In1_left_behind = 0;
+	State_In2_left_behind = 1;
+	State_In1_right_behind = 0;
+	State_In2_right_behind = 1;
 }
 void turn_left(void)
 {
+	//左转
 	
 }
 void turn_right(void)
 {
+	//右转
 	
 }
 void stop(void)
 {
-	
+	//停止
+	State_In1_left_front = 0;
+	State_In2_left_front = 0;
+	State_In1_right_front = 0;
+	State_In2_right_front = 0;
+	State_In1_left_behind = 0;
+	State_In2_left_behind = 0;
+	State_In1_right_behind = 0;
+	State_In2_right_behind = 0;
 }
 void brake(void)
 {
-
+	//刹车
+	State_In1_left_front = 1;
+	State_In2_left_front = 1;
+	State_In1_right_front = 1;
+	State_In2_right_front = 1;
+	State_In1_left_behind = 1;
+	State_In2_left_behind = 1;
+	State_In1_right_behind = 1;
+	State_In2_right_behind = 1;
 }

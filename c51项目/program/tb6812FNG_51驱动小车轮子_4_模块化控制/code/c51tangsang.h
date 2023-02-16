@@ -4,9 +4,11 @@
  *该库为tangsang亲手打造，人工打造，比较粗糙，功能欠缺或瑕疵，仅提供学习参考 
  */
  
- 
- #include <REGX52.H>
- 
+#ifndef  _C51TANGSANG_H_
+#define  _C51TANGSANG_H_
+
+#include <REGX52.H>
+
 sbit RCK  = P3^5;  //
 sbit SRCK = P3^6;  //
 sbit SER  = P3^4;  //
@@ -18,15 +20,7 @@ sbit time_0_case=TCON^4;
 typedef unsigned int uint;
 typedef unsigned char uchar;
 
-
-
 extern uchar date_uart;//用来实时监听接受到的数据
-
-
-
-
-#ifndef  _C51TANGSANG_H_
-#define  _C51TANGSANG_H_
 
 void delayus(unsigned int);
 extern void delay(unsigned int);
@@ -69,7 +63,4 @@ extern void uart_getdata();
  * 串口接收数据会触发中断，跟程序耦合性很大，函数相当于一个模板
  * */
 
-
 #endif
-
-

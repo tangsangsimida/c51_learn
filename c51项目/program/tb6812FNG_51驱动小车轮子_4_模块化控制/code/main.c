@@ -1,4 +1,6 @@
 #include "the_auto_turn_where.h"
+#include <REGX52.H>
+#include "c51tangsang.h"
 
 sbit PWM_left_behind = P3^0; //PWM1
 sbit STBY_left = P3^1;		 //芯片工作状态
@@ -27,9 +29,9 @@ enum State_What_To_Do_Now{goalong=1,goback,turnleft,turnright,goleft,goright}sta
 
 //电机功率系数1=100；
 unsigned char compare1=20;
-unsigned int conter1=0,compare_turn_state=1500;
-
-void Trolley_power(void);
+unsigned int conter1=0,compare_turn_state=500;
+//根基小车的固定路径，计算出规则进行设计路线，不可进行路径临时改变
+void work_use_time(void);
 
 int main ()
 {
@@ -69,12 +71,12 @@ int main ()
 	}
 }
 
-void Trolley_power(void) interrupt 1
+void work_use_time(void) interrupt 1
 {
-	TH0=64535/256;//高八位数据     晶振12mhz，一个周期为1us，最大65535us，
+	TH0=64535/256;//高八位数据     晶振12mhz，一个周期为1ms，最大65535us，
 	TL0=64535%256;//低八位数据->64535 = 65535-1000; -> 1000us=1ms; 定时器单位为1ms
 	conter1++;
-	conter1%=3000;
+	conter1%=1000;
 	if(conter1<compare_turn_state)
 	{
 		go_along();
