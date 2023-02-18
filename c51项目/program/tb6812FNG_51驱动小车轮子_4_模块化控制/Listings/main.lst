@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  02/16/2023 23:16:31 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  02/18/2023 16:32:09 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -12,116 +12,180 @@ line level    source
    2          #include <REGX52.H>
    3          #include "c51tangsang.h"
    4          
-   5          sbit PWM_left_behind = P3^0; //PWM1
-   6          sbit STBY_left = P3^1;           //芯片工作状态
-   7          sbit IN1_left_behind = P3^2; //IN1
-   8          sbit IN2_left_behind = P3^3; //IN2
-   9          // 右后方轮子
-  10          sbit PWM_right_behind = P2^0; //PWM2
-  11          sbit STBY_right = P2^1;          //芯片工作状态2
-  12          sbit IN1_right_behind = P2^3; //IN1_2
-  13          sbit IN2_right_behind = P2^2; //IN2_2
-  14          // 左前方轮子
-  15          sbit PWM_left_front = P0^2; //PWM3
-  16          //sbit STBY_right = P2^1;                //芯片工作状态2
-  17          sbit IN1_left_front = P0^0; //IN1_2
-  18          sbit IN2_left_front = P0^1; //IN2_2
-  19          // 右前方轮子
-  20          sbit PWM_right_front = P2^6; //PWM4
-  21          //sbit STBY_right = P2^1;                //芯片工作状态2
-  22          sbit IN1_right_front = P2^4; //IN1_2
-  23          sbit IN2_right_front = P2^5; //IN2_2
-  24          
-  25          //pwm功率系数100、计时器
-  26          
-  27          unsigned char State_what_to_do_now;
-  28          enum State_What_To_Do_Now{goalong=1,goback,turnleft,turnright,goleft,goright}state_whattodo;
-  29          
-  30          //电机功率系数1=100；
-  31          unsigned char compare1=20;
-  32          unsigned int conter1=0,compare_turn_state=500;
-  33          //根基小车的固定路径，计算出规则进行设计路线，不可进行路径临时改变
-  34          void work_use_time(void);
-  35          
-  36          int main ()
-  37          {
-  38   1              //time_0_init()
-  39   1              time_0_ms_init();
-  40   1              
-  41   1              //四个电机八个控制位全部置1初始化刹车
-  42   1              IN1_right_front = State_In1_left_front;
-  43   1              IN1_right_behind = State_In1_left_behind;
-  44   1              IN1_left_front = State_In1_right_front;
-  45   1              IN1_left_behind = State_In1_right_behind;
-  46   1              IN2_right_front = State_In2_left_front;
-  47   1              IN2_right_behind = State_In2_left_behind;
-  48   1              IN2_left_front = State_In2_right_front;
-  49   1              IN2_left_behind = State_In2_right_behind;
-  50   1              
-  51   1              //电机给电
-  52   1              PWM_right_behind=1;
-  53   1              PWM_right_front = 1;
-  54   1              PWM_left_behind=1;
-C51 COMPILER V9.54   MAIN                                                                  02/16/2023 23:16:31 PAGE 2   
+   5          //电机功率系数1=100；
+   6          unsigned char conter2=0,compare=20;
+   7          unsigned int conter1=0,compare_turn_state=1000;
+   8          //根基小车的固定路径，计算出规则进行设计路线，不可进行路径临时改变
+   9          void work_use_time(void);
+  10          //定时器
+  11          void time_10_us_init(void);
+  12          void auto_pwm(void);
+  13          int main ()
+  14          {
+  15   1              //time_0_init()
+  16   1              time_0_ms_init();
+  17   1              //time1
+  18   1              time_10_us_init();
+  19   1              
+  20   1              //四个电机八个控制位全部置1初始化刹车
+  21   1              IN1_right_front = State_In1_left_front;
+  22   1              IN1_right_behind = State_In1_left_behind;
+  23   1              IN1_left_front = State_In1_right_front;
+  24   1              IN1_left_behind = State_In1_right_behind;
+  25   1              IN2_right_front = State_In2_left_front;
+  26   1              IN2_right_behind = State_In2_left_behind;
+  27   1              IN2_left_front = State_In2_right_front;
+  28   1              IN2_left_behind = State_In2_right_behind;
+  29   1              
+  30   1              //电机给电
+  31   1              PWM_right_behind=1;
+  32   1              PWM_right_front = 1;
+  33   1              PWM_left_behind=1;
+  34   1              PWM_left_front = 1;
+  35   1              
+  36   1              //芯片使能
+  37   1              STBY_left = 1;
+  38   1              STBY_right=1;
+  39   1              
+  40   1              while(1)
+  41   1              {
+  42   2                      //正转
+  43   2      //              STBY_left = 1; //电机驱动芯片开始工作
+  44   2      //              PWM_left_behind =1; //pwm输入，可以直接全功率输入---->置1
+  45   2      //              //电机旋转方向------>正反转
+  46   2      //              //正转
+  47   2      //              State_In1_left_front = 1;
+  48   2      //              State_In2_left_front = 0;
+  49   2      //              State_In1_right_front = 0;
+  50   2      //              State_In2_right_front = 1;
+  51   2      //              State_In1_left_behind = 0;
+  52   2      //              State_In2_left_behind = 1;
+  53   2      //              State_In1_right_behind = 1;
+  54   2      //              State_In2_right_behind = 0;
+C51 COMPILER V9.54   MAIN                                                                  02/18/2023 16:32:09 PAGE 2   
 
-  55   1              PWM_left_front = 1;
-  56   1              
-  57   1              //芯片使能
-  58   1              STBY_left = 1;
-  59   1              STBY_right=1;
-  60   1              
-  61   1              while(1)
-  62   1              {
-  63   2                      //正转
-  64   2      //              STBY_left = 1; //电机驱动芯片开始工作
-  65   2      //              PWM_left_behind =1; //pwm输入，可以直接全功率输入---->置1
-  66   2      //              //电机旋转方向------>正反转
-  67   2      //              //00------->自由停车
-  68   2      //              //10------->正转
-  69   2      //              //01------->反转
-  70   2      //              //11------->刹车
-  71   2              }
-  72   1      }
-  73          
-  74          void work_use_time(void) interrupt 1
-  75          {
-  76   1              TH0=64535/256;//高八位数据     晶振12mhz，一个周期为1ms，最大65535us，
-  77   1              TL0=64535%256;//低八位数据->64535 = 65535-1000; -> 1000us=1ms; 定时器单位为1ms
-  78   1              conter1++;
-  79   1              conter1%=1000;
-  80   1              if(conter1<compare_turn_state)
-  81   1              {
-  82   2                      go_along();
-  83   2                      IN1_right_front = State_In1_left_front;
-  84   2                      IN1_right_behind = State_In1_left_behind;
-  85   2                      IN1_left_front = State_In1_right_front;
-  86   2                      IN1_left_behind = State_In1_right_behind;
-  87   2                      IN2_right_front = State_In2_left_front;
-  88   2                      IN2_right_behind = State_In2_left_behind;
-  89   2                      IN2_left_front = State_In2_right_front;
-  90   2                      IN2_left_behind = State_In2_right_behind;
-  91   2              }
-  92   1              else
-  93   1              {
-  94   2                      go_back();
-  95   2                      IN1_right_front = State_In1_left_front;
-  96   2                      IN1_right_behind = State_In1_left_behind;
-  97   2                      IN1_left_front = State_In1_right_front;
-  98   2                      IN1_left_behind = State_In1_right_behind;
-  99   2                      IN2_right_front = State_In2_left_front;
- 100   2                      IN2_right_behind = State_In2_left_behind;
- 101   2                      IN2_left_front = State_In2_right_front;
- 102   2                      IN2_left_behind = State_In2_right_behind;
- 103   2              }       
- 104   1      }
+  55   2              }
+  56   1      }
+  57          void time_10_us_init(void)
+  58          {
+  59   1              TMOD&=0x0F;
+  60   1              TMOD|=0x10;
+  61   1              TL1=65405%256;
+  62   1              TH1=65405/256;
+  63   1              TF1=0;//设置默认为未溢出        
+  64   1      
+  65   1      //      IE1=1;//中断开关
+  66   1      //      IT1=1;
+  67   1              
+  68   1              ET1=1;//三个中断系统的接口
+  69   1              PT1=1;
+  70   1              TR1=1;//定时器1开始运行
+  71   1      }
+  72          void auto_pwm(void) interrupt 3
+  73          {
+  74   1              //10us 
+  75   1              TL1=65435%256;
+  76   1              TH1=65435/256;
+  77   1              conter2++;
+  78   1              conter2%=100;
+  79   1              if(conter2>compare)
+  80   1              {
+  81   2                      stop();
+  82   2                      IN1_right_front = State_In1_left_front;
+  83   2                      IN1_right_behind = State_In1_left_behind;
+  84   2                      IN1_left_front = State_In1_right_front;
+  85   2                      IN1_left_behind = State_In1_right_behind;
+  86   2                      IN2_right_front = State_In2_left_front;
+  87   2                      IN2_right_behind = State_In2_left_behind;
+  88   2                      IN2_left_front = State_In2_right_front;
+  89   2                      IN2_left_behind = State_In2_right_behind;
+  90   2              }
+  91   1              
+  92   1      }
+  93          void work_use_time(void) interrupt 1
+  94          {
+  95   1              TH0=65525/256;  //高八位数据     晶振12mhz，一个周期为1ms，最大65535us，
+  96   1              TL0=65525%256;  //低八位数据->64535 = 65535-1000; -> 1000us=1ms; 定时器单位为1ms
+  97   1              conter1++;
+  98   1              conter1%=4000;
+  99   1              if(conter1<500)
+ 100   1              {
+ 101   2                      compare=20;
+ 102   2                      brake();
+ 103   2                      go_along();
+ 104   2                      IN1_right_front = State_In1_left_front;
+ 105   2                      IN1_right_behind = State_In1_left_behind;
+ 106   2                      IN1_left_front = State_In1_right_front;
+ 107   2                      IN1_left_behind = State_In1_right_behind;
+ 108   2                      IN2_right_front = State_In2_left_front;
+ 109   2                      IN2_right_behind = State_In2_left_behind;
+ 110   2                      IN2_left_front = State_In2_right_front;
+ 111   2                      IN2_left_behind = State_In2_right_behind;
+ 112   2              }
+ 113   1              else if(conter1<1500&&conter1>=1000)
+ 114   1              {
+ 115   2                      compare=20;
+ 116   2                      go_right();
+C51 COMPILER V9.54   MAIN                                                                  02/18/2023 16:32:09 PAGE 3   
+
+ 117   2                      IN1_right_front = State_In1_left_front;
+ 118   2                      IN1_right_behind = State_In1_left_behind;
+ 119   2                      IN1_left_front = State_In1_right_front;
+ 120   2                      IN1_left_behind = State_In1_right_behind;
+ 121   2                      IN2_right_front = State_In2_left_front;
+ 122   2                      IN2_right_behind = State_In2_left_behind;
+ 123   2                      IN2_left_front = State_In2_right_front;
+ 124   2                      IN2_left_behind = State_In2_right_behind;
+ 125   2                      
+ 126   2              }
+ 127   1              else if(conter1<2500&&conter1>=2000)
+ 128   1              {
+ 129   2                      compare=20;
+ 130   2                      go_back();
+ 131   2                      IN1_right_front = State_In1_left_front;
+ 132   2                      IN1_right_behind = State_In1_left_behind;
+ 133   2                      IN1_left_front = State_In1_right_front;
+ 134   2                      IN1_left_behind = State_In1_right_behind;
+ 135   2                      IN2_right_front = State_In2_left_front;
+ 136   2                      IN2_right_behind = State_In2_left_behind;
+ 137   2                      IN2_left_front = State_In2_right_front;
+ 138   2                      IN2_left_behind = State_In2_right_behind;
+ 139   2              }
+ 140   1              else if(conter1<3500&&conter1>=3000)
+ 141   1              {
+ 142   2                      compare=20;
+ 143   2                      go_left();
+ 144   2                      IN1_right_front = State_In1_left_front;
+ 145   2                      IN1_right_behind = State_In1_left_behind;
+ 146   2                      IN1_left_front = State_In1_right_front;
+ 147   2                      IN1_left_behind = State_In1_right_behind;
+ 148   2                      IN2_right_front = State_In2_left_front;
+ 149   2                      IN2_right_behind = State_In2_left_behind;
+ 150   2                      IN2_left_front = State_In2_right_front;
+ 151   2                      IN2_left_behind = State_In2_right_behind;
+ 152   2      
+ 153   2              }
+ 154   1              else
+ 155   1              {
+ 156   2                      stop();
+ 157   2                      IN1_right_front = State_In1_left_front;
+ 158   2                      IN1_right_behind = State_In1_left_behind;
+ 159   2                      IN1_left_front = State_In1_right_front;
+ 160   2                      IN1_left_behind = State_In1_right_behind;
+ 161   2                      IN2_right_front = State_In2_left_front;
+ 162   2                      IN2_right_behind = State_In2_left_behind;
+ 163   2                      IN2_left_front = State_In2_right_front;
+ 164   2                      IN2_left_behind = State_In2_right_behind;
+ 165   2              }
+ 166   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    216    ----
+   CODE SIZE        =    467    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      7    ----
+   DATA SIZE        =      6    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
